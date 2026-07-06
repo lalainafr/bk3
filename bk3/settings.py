@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'account_app',
     'base_app',
+    'widget_tweaks', 
+
 ]
 
 MIDDLEWARE = [
@@ -75,13 +78,16 @@ WSGI_APPLICATION = 'bk3.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bk3',                      
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+   }
 }
 
 
@@ -134,3 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
     # URL - every time  we upload image it will go to MEDIA directory
 MEDIA_URL = 'media/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
+# make our own custom user model
+AUTH_USER_MODEL = 'account_app.User'
