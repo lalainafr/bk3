@@ -1,38 +1,32 @@
 {% extends 'base_auth.html' %} {% load static %} {% load widget_tweaks %} {% block content %}
-
 <section class="masthead">
-    <div class="container p-5 p-lg-5 h-100" background-image: url("img/bg-masthead.jpg")>
-        <div class="row my-5">
-            <div class="col-12 col-md-6">
-                <h1 class="display-4 fw-bold lh-1 text-light text-center">
-                    Registration
-                </h1>
-                <hr class="divider divider-warning" />
-                <br />
-                <i class="fa-regular fa-circle-right text-light fa-4x" style="opacity: 0.4;"></i>
-                <br>
-                <br>
-                <p class="text-light">
-                Nulla facilisi. Aliquam erat volutpat. Donec quis tincidunt purus. Nunc a fringilla nunc. Duis at quam velit. Etiam consectetur pulvinar risus tristique pretium. Nam sodales posuere imperdiet. 
-                </p>
-                <p class="text-light">
+    <div class="container px-4 px-lg-5 h-100" background-image: url("img/bg-masthead.jpg")>
+
+<div class="row m-4 p-4">
+    <div class="col-md-5">
+        <div>
+            <h1 class="display-3 fw-bold lh-1 m-5 text-light text-center">
+                Registration
+            </h1>
+            <hr class="divider divider-warning" />
+            <br />
+            <i class="fa-regular fa-circle-right text-light fa-4x" style="opacity: 0.4;"></i>
+            <br>
+            <br>
+            <p class="text-light">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Suscipit illum, voluptatem doloremque hic nisi ipsum eum, fuga
                 possimus perspiciatis expedita, corrupti beatae delectus vero
                 sit molestias nostrum aliquid quae magnam? Lorem ipsum dolor
                 sit, amet consectetur adipisicing elit
-                </p>
-
-
-
-
-
-                <br />
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="d-flex justify-content-center">
-
-                   <form
+            </p>
+            <br />
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-8">
+                <form
                     class="p-5 p-md-5 border rounded-4 bg-white shadow-light shadow-lg bg-ligth opacity-75"
                     method="POST"             
                     >
@@ -86,11 +80,14 @@
                         <a href="{% url 'login' %}"> Log In</a></small
                     >
                 </form>
-                </div>
             </div>
         </div>
     </div>
+</div>
+    </div>
 </section>
 
+
+</section> -->
 {% endblock content %}
 <!-- Footer-->
