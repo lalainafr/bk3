@@ -1,144 +1,23 @@
-{% extends 'base.html' %} {% load static %} {% block header %}
+{%extends 'base.html'%} {%load static%} {%block content%}
+<div class="col-lg-8 align-self-end">
+    <h1 class="text-white font-weight-bold opacity-50">
+        <span class="display-5">
+            E N T R E Z <br />R E V E Z <br />
+            R E S S E N T E Z
+        </span>
+        <br />
+    </h1>
+    <hr class="divider" />
+</div>
+<div class="col-lg-8 align-self-baseline">
+    <p class="text-white-75 mb-5">
+        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
+        consectetur, adipisci velit..." "There is no one who loves pain itself,
+        who seeks after it and wants to have it, simply because it is pain..."
+    </p>
+    <a class="btn btn-primary btn-xl" href="">Démarrer</a>
+</div>
 
-<section class="masthead">
-    <div class="container px-4 px-lg-5 h-100" background-image: url("img/bg-masthead.jpg")>
-        <div
-            class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
-        >
-            <div class="col-lg-8 align-self-end">
-                <h1 class="text-white font-weight-bold">
-                    The car of your dream is waiting for you...
-                </h1>
-                <hr class="divider" />
-            </div>
-            <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 mb-5">
-                    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
-                </p>
-                <a class="btn btn-primary btn-xl" href="">Find you car</a>
-            </div>
-        </div>
-    </div>
-</section>
+{%endblock content%}
 
-{% endblock header %} {% block content %}
-
-<!-- About-->
-<section class="page-section" id="about" style="background-color: rgba(166, 103, 30, 0.2)"">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-lg-8 text-center">
-                <i class="fa-regular fa-building text-primary fa-3x"></i>
-                <br><br>
-                <h2 class="text-secondary-75 mt-0">M-MOTORS</h2>
-                <hr class="divider divider-primary" />
-                <p class="mb-4 text-start">
-                   Etablished in 1987, specializing in the sale of used vehicles. The company has achieved great success and built a strong reputation; thirty years after its founding, it ranks among the top ten companies nationwide. This success stems from various factors, all centered on customer satisfaction.
-                </p>
-                <p class=" mb-4 text-start">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer placerat venenatis est quis gravida. Vestibulum tincidunt mi nibh, a mattis nibh elementum at. Phasellus et placerat magna. Sed vestibulum erat non interdum consequat. In sagittis quam quis augue mattis, ullamcorper ultrices nunc mollis. Curabitur gravida dictum erat, sed lacinia metus viverra pharetra. Maecenas tortor libero, sagittis ac hendrerit eu, aliquam vel odio. In maximus lectus non purus lacinia, in dictum quam auctor. Proin at dui sollicitudin, posuere mauris ut, malesuada dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus in tempor mi. Aenean sodales hendrerit nunc, nec rutrum mauris efficitur eu. Integer luctus viverra mauris, quis semper nisl faucibus eget. Sed eget gravida neque.
-                </p>
-                <p class=" mb-4 text-start">
-                Nunc aliquet ultrices elit ac auctor. Phasellus at gravida dolor, quis aliquet neque. Integer rutrum tortor tincidunt, lobortis mauris vel, accumsan urna. Donec convallis nunc risus, . Fusce pellentesque massa eget arcu pretium, ut facilisis metus pulvinar. Aenean in velit elit. Sed eu nisl quis mi elementum ultrices.
-                </p>
-                <p class=" mb-4 text-start">
-                Integer ipsum lorem, hendrerit in facilisis et, volutpat quis augue. Donec sit amet dui viverra, consectetur turpis eu, auctor quam. Aliquam imperdiet venenatis felis a congue. Integer efficitur facilisis nunc non tristique. Phasellus eu ex at mauris aliquet congue at ut elit. Ut et ultricies ex. Vestibulum nisi tortor, bibendum in neque vitae, venenatis tristique tellus. Cras fringilla neque eu velit hendrerit dignissim. Sed lacinia felis vel erat mollis, et tempor felis vestibulum. Mauris a finibus tellus </p>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Services-->
-<section class="page-section" id="services">
-    <div class="container px-4 px-lg-5">
-        <h2 class="text-center mt-0">At Your Service</h2>
-        <hr class="divider" />
-        <div class="row gx-4 gx-lg-5">
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
-                    <div class="mb-2">
-                        <i class="fa-brands fa-shopify fa-3x text-primary"></i>
-                    </div>
-                    <br>
-                    <h3 class="h4 mb-2">Sales & leasing</h3>
-                    <p class="text-muted mb-0">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non.
-
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5 py-1">
-                        <i class="fa-solid fa-car-on fa-3x text-primary"></i>                    
-                </div>
-                <br>
-                    <div class="mb-2">
-                    <h3 class="h4 mb-2">Breakdown assistance</h3>
-                    <p class="text-muted mb-0"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
-                    <div class="mb-2">
-                        <i class="fa-regular fa-circle-user fa-3x text-primary"></i>
-                    </div>
-                    <br>
-                    <h3 class="h4">After-sale service</h3>
-                    <p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
-                    <div class="mb-2">
-                        <i class="fa-brands fa-battle-net fa-3x text-primary"></i>
-                    </div>
-                    <h3 class="h4 mt-4">Insurance</h3>
-                    <p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact-->
-<section class="page-section text-white" id="contact" style="background-color: rgba(38, 37, 35, 0.9)">
-
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-lg-8 col-xl-6 text-center">
-                <i class="fa-regular fa-comment-dots fa-3x text-primary"></i>
-                <br>
-                <br>
-                <h2 class="mt-0">Let's Get In Touch!</h2>
-                <br>
-                <hr class="divider" />
-                <p class="text-ligth mb-5">
-                    Ready to start your next project with us? Come and see us!
-                </p>
-                
-                <div class="py-5 border rounded-5 shadow-light shadow-lg bg-ligth opacity-75 text-ligth" style="background-color: rgba(238, 236, 230, 0.1)">
-                    <img src="{% static 'img/adresse.png'%}" alt="" style="justify-content: center; width: 90%; height: auto;">
-                    <br><br><br>
-
-                    <i class="fa-regular fa-envelope text-primary"></i>  <br>                   
-                    <p>
-                    m-motor@mail.mail <br>
-                    </p>
-                    
-                    <i class="fa-solid fa-square-phone-flip text-primary"></i> <br>
-                    <p>
-                        01 23 45 67 89 
-                    </p>
-
-                    <i class="fa-solid fa-location-dot text-primary"></i> 
-                    <p>
-                    42 Rue des Érables <br>
-                    75000 Villeverte - France
-                    </p>  
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-{% endblock content %}
 <!-- Footer-->

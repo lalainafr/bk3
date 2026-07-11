@@ -4,17 +4,16 @@
     class="navbar navbar-expand-lg navbar-light fixed-top py-3 bg-transparent"
     id="mainNav"
 >
+    <!-- box-shadow: 10px 5px 15px rgba(81, 79, 79, 1.8); -->
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#page-top">
+        <a class="navbar-brand" href="{% url 'home' %}">
             <img
-                src=" {% static 'img/logo.png' %}"
+                src=" {% static 'img/logo1.png' %}"
                 alt="..."
-                style="
-                    width: 80px;
-                    height: 80px;
-                    box-shadow: 10px 5px 15px rgb(85, 75, 75, 0.25);
-                "
-        /></a>
+                style="width: 40%; height: auto;;"
+                class=" rounded-3  shadow-black shadow bg-dark opacity-50"
+            />
+        </a>
         <!-- Message  -->
         {% if messages %} {% for message in messages %}
         <div
@@ -39,14 +38,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
+                    <a class="nav-link" href="#about">Offre</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#services">Services</a>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#Offre">Services</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Contact</a>
-                </li>
+                </li> -->
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link opacity-75" href="{% url 'logout' %}"
@@ -85,6 +84,13 @@
         </div>
     </div>
 </nav>
+
+
+<section class="masthead">
+    <div class="container px-4 px-lg-5 h-100" background-image: url("img/bg-masthead.jpg")>
+        <div
+            class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
+        >
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
