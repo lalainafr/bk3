@@ -8,12 +8,16 @@
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="{% url 'home' %}">
             <img
-                src=" {% static 'img/logo1.png' %}"
+                src=" {% static 'img/logo1.jpg' %}"
                 alt="..."
-                style="width: 40%; height: auto;;"
-                class=" rounded-3  shadow-black shadow bg-dark opacity-50"
+                style="width: 12%; height: auto;;"
+                class=" rounded-4  shadow-lg shadow-dark bg-dark opacity-50"
             />
         </a>
+
+
+
+
         <!-- Message  -->
         {% if messages %} {% for message in messages %}
         <div
@@ -38,18 +42,18 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">Offre</a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#Offre">Services</a>
+                    <a class="nav-link" href="#about">Film</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#Offre">Evenement</a>
+                </li>
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#contact">Contact</a>
                 </li> -->
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link opacity-75" href="{% url 'logout' %}"
-                        >LOGOUT</a
+                        >Logout</a
                     >
                 </li>
                 <li class="nav-item">
@@ -70,7 +74,7 @@
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link opacity-75" href="{% url 'login' %}"
-                        >LOGIN</a
+                        >Login</a
                     >
                 </li>
                 <li class="nav-item">
