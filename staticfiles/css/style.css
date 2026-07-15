@@ -10940,7 +10940,7 @@ section.masthead h1, section.masthead .h1 {
 }
 @media (min-width: 992px) {
   section.masthead {
-    height: 100vh;
+    height: 100dvh;
     min-height: 40rem;
     padding-top: 4.5rem;
     padding-bottom: 0;

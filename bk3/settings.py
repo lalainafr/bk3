@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "account_app",
+    "seance_app",
     "base_app",
     "widget_tweaks",
 ]

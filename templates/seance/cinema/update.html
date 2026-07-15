@@ -1,0 +1,62 @@
+{%extends 'seance/dashboard.html'%} {%load static%} {%load widget_tweaks%}{%block content%}
+
+<div class="container">
+    <div class="row my-5 py-5">
+        <div class="col-12 col-md-6">
+                 <div>
+                <h1 class="display-3 fw-bold mb-3 text-secondary mt-4">Modifier cinéma</h1>
+                <br>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
+                    illum, voluptatem doloremque hic nisi ipsum eum, fuga possimus
+                    perspiciatis expedita,
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
+                    illum, voluptatem doloremque hic nisi ipsum eum, fuga possimus
+                    perspiciatis expedita,
+                    illum, voluptatem doloremque hic nisi ipsum eum, fuga possimus
+                    perspiciatis expedita,
+                </p>
+            </div>
+        </div>    
+
+        <div class="col-12 col-md-6">
+            <div class="d-flex justify-content-center">
+                   <form
+                    class="rounded-4 p-4 p-md-5 shadow-lg bg-ligth w-75"
+                    method="POST"
+                >
+                    {%csrf_token%}
+                    <div class="floatingInput mb-3 text-start">
+                        <label for="floatingInput" class="form-label ">Nom</label>
+                        {% render_field form.nom class="form-control" %}
+                    </div>
+                    <div class="floatingInput mb-3 text-start">
+                        <label for="floatingInput" class="form-label"
+                            >Adresse</label
+                        >
+                        {% render_field form.adresse class="form-control" %}
+                    </div>
+                    <div class="floatingInput mb-3 text-start">
+                        <label for="floatingInput" class="form-label"
+                            >Telephone</label
+                        >
+                        {% render_field form.telephone class="form-control" %}
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-outline-primary">
+                        Modifier
+                    </button>
+                </form>
+
+        </div>
+        </div>
+        </div>
+    </div>
+
+</div>
+
+{%endblock content%}
+<!-- Footer-->

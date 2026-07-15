@@ -16,15 +16,15 @@ class TestHomePage(TestCase, SimpleTestCase):
     def test_homepage_contains_welcome_message_and_have_correct_status_code(self):
         response = self.client.get(reverse("home"))
         self.assertContains(
-            response, "The car of your dream is waiting for you", status_code=200
+            response, "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet", status_code=200
         )
 
     def test_homepage_with_correct_title(self):
         response = self.client.get(reverse("home"))
         self.assertContains(
-            response, "<title>Web site do serve as a portfolio</title>", html=True
+            response, "<title>Portfolio for bachelor exam</title>", html=True
         )
 
     def test_homepage_contains_company_logo(self):
-        logo_path = Path(settings.BASE_DIR) / "staticfiles" / "img" / "logo.png"
+        logo_path = Path(settings.BASE_DIR) / "staticfiles" / "img" / "logo1.jpg"
         self.assertTrue(logo_path.exists(), f"expected logo image at {logo_path}")

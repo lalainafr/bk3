@@ -1,13 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import *
-from django.views.generic import View
-
-# token - mail confirmation import
-from django.template.loader import render_to_string
-from django.conf import settings
-from django.contrib.auth import get_user_model
 from .form import RegisterCustomerForm
 
 
@@ -27,7 +20,7 @@ def register_user(request):
     else:
         form = RegisterCustomerForm()
         context = {"form": form}
-        return render(request, "account_app/register_user.html", context)
+        return render(request, "account/register_user.html", context)
 
 
 # login
@@ -44,7 +37,7 @@ def login_user(request):
             messages.warning(request, "Invalid username or password")
             return redirect("login")
     else:
-        return render(request, "account_app/login.html")
+        return render(request, "account/login.html")
 
 
 # logout

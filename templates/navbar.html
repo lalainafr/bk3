@@ -5,7 +5,7 @@
     id="mainNav"
 >
     <!-- box-shadow: 10px 5px 15px rgba(81, 79, 79, 1.8); -->
-    <div class="container px-4 px-lg-5">
+    <div class="container px-lg-5">
         <a class="navbar-brand" href="{% url 'home' %}">
             <img
                 src=" {% static 'img/logo1.jpg' %}"
@@ -14,9 +14,6 @@
                 class=" rounded-4  shadow-lg shadow-dark bg-dark opacity-50"
             />
         </a>
-
-
-
 
         <!-- Message  -->
         {% if messages %} {% for message in messages %}
