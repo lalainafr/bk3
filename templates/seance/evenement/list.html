@@ -1,0 +1,97 @@
+{% extends 'seance/dashboard.html'%} {% block content%}
+
+<div class="container my-5 py-5"">
+
+
+
+<h1 class="display-3 fw-bold mb-3 text-secondary">Liste des evenements</h1>
+<br>
+<p>
+    Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor eu
+    interdum etiam maecenas quam. Lorem et libero sed interdum libero neque
+    primis lectus. Nunc hac in volutpat taciti vitae taciti. Class penatibus est
+    turpis taciti vulputate euismod curabitur quam sed. Augue leo amet lacinia
+    lobortis lectus, felis cubilia vehicula. Sit mi quis, montes primis donec
+    finibus. Ultrices mi litora habitant; massa arcu facilisis. Dapibus donec
+    sagittis auctor sollicitudin pulvinar, augue vestibulum eget.
+    <br /><br />
+</p>
+<a href="{% url 'create_evenement' %}" style="text-decoration: none">
+    <i class="fa-solid fa-circle-arrow-right text-info"></i>
+    <span class="text-info"> Créer evenement </span>
+</a>
+<br><br>
+<div>
+    <div class="card shadow-lg p-2 mb-5">
+        <div class="card-body p-5">
+            <table class="table">
+                <thead>
+                    <tr class="text-center text-secondary">
+                        <th scope="col"> id</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Affiche</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                {% for evenement in evenements %}
+                <tbody>
+                    <tr>
+                        <td class="text-center">
+                            <small>
+                                <p class="text-muted">
+                                    {{evenement.id}}
+                                </p>
+                            </small>
+                        </td>
+                        <td class="text-center">
+                            <small>
+                                <p class="text-muted">
+                                    {{evenement.titre}}
+                                </p>
+                            </small>
+                        </td>
+                        <td class="text-center">
+                            <small>
+                                <p class="text-muted">
+                                    {{evenement.genre}}
+                                </p>
+                            </small>
+                        </td>
+                        <td class="text-center w-50">
+                            <small>
+                                <p class="text-muted">
+                                    {{evenement.description}}
+                                </p>
+                            </small>
+                        </td>
+                        <td class="text-center">
+                            <small>
+                                  <img src="/media/{{ evenement.affiche }}" alt="{{ evenement.titre }}" style="width: 30px;">
+                            </small>
+                        </td>
+                        <td class="text-center w-25">
+                            <a href="{% url 'update_evenement' evenement.id %}" style="text-decoration: none;"> 
+                                <button type="button" class=" btn btn-sm btn-outline-primary rounded-4">
+                                    Modifier
+                                </button>
+                            </a>
+                            <a href="{% url 'delete_evenement' evenement.id %}" style="text-decoration: none;"> 
+                                <button type="button" class=" btn btn-sm btn-outline-danger rounded-4">
+                                Effacer
+                             </button>
+                            </a>
+                        </td>
+                     
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock content%}

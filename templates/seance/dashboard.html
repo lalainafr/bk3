@@ -115,7 +115,7 @@
                         aria-controls="collapseTwo"
                     >
                         <i class="fas fa-fw fa-cog"></i>
-                        <span>Seances</span>
+                        <span>Back office</span>
                     </a>
                     <div
                         id="collapseTwo"
@@ -132,10 +132,23 @@
                                 href="{% url 'list_cinema' %}"
                                 >Cinema</a
                             >
-                            <a class="collapse-item" href="">Salle</a>
+                            <a
+                                class="collapse-item"
+                                id="test"
+                                href="{% url 'list_salle' %}"
+                                >Salle</a
+                            >
+                            <a
+                                class="collapse-item"
+                                href="{% url 'list_film' %}"
+                                >Film</a
+                            >
+                            <a
+                                class="collapse-item"
+                                href="{% url 'list_evenement' %}"
+                                >Evenement</a
+                            >
                             <a class="collapse-item" href="">Seance</a>
-                            <a class="collapse-item" href="">Film</a>
-                            <a class="collapse-item" href="">Evenement</a>
                         </div>
                     </div>
                 </li>
@@ -232,6 +245,16 @@
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Message  -->
+                {% if messages %} {% for message in messages %}
+                <div
+                    class="alert alert-{{message.tags}} alert-dismissible fade show auto-hide shadow-lg rounded-4 opacity-50"
+                    role="alert"
+                >
+                    {{message}}
+                </div>
+                {% endfor %} {% endif %}
+
                 <!-- Main Content -->
                 <div id="content">
                     <!-- Topbar -->
@@ -332,5 +355,7 @@
         <!-- Page level custom scripts -->
         <script src="{% static 'dashboard/js/demo/chart-area-demo.js' %}"></script>
         <script src="{% static 'dashboard/js/demo/chart-pie-demo.js' %}"></script>
+
+        <script src=" {% static 'js/myscript.js' %}"></script>
     </body>
 </html>

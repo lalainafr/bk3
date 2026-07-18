@@ -1,0 +1,74 @@
+{% extends 'seance/dashboard.html'%} {% block content %}
+<div class="container">
+    <div class="border p-4 bg-light shadow-lg m-5 bg-white rounded">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="px-5">
+                    <h3 class="display-4 fw-bold lh-1 mb-3 text-secondary">
+                        {{ film.titre}}
+                    </h3>
+
+                    <br />
+                    <br />
+                    <td class="text-center">
+                        <small>
+                            <img
+                                src="/media/{{ film.affiche }}"
+                                alt="{{ film.affiche }}"
+                                style="width: 40%"
+                            />
+                        </small>
+                    </td>
+                    <br />
+                    <br />
+                    <p>{{film.description }}</p>
+                </div>
+            </div>
+            <div
+                class="col-md-4 border mx-3 shadow-lg p-4 mb-5 bg-white rounded"
+            >
+                <h4 class="display-6 lh-1 mb-3 text-secondary">Quick Info</h4>
+                <p>
+                    <small>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Nulla recusandae atque, minima consequuntur,
+                    </small>
+                </p>
+
+                <div class="pt-3">
+                    <small> <b>Numero</b>: {{film.id}} </small>
+                    <br />
+                    <br />
+                    <small> <b>Réalisateur</b>: {{film.realisateur}} </small>
+                    <br />
+                    <br />
+                    <small> <b>Durée</b>: {{film.duree}} h </small>
+                    <br />
+                    <br />
+                    <small> <b>Genre</b>: {{film.genre}} </small>
+                    <br />
+                    <br />
+                    <small> <b>Date de sortie</b>: {{film.date_sortie}} </small>
+                    <br />
+                    <br />
+                </div>
+
+                <br />
+                <br />
+
+                <br />
+
+                <a href="{% url 'list_film'%}" style="text-decoration: none">
+                    <button
+                        type="button"
+                        class="btn btn btn-outline-success rounded-4"
+                    >
+                        Retour
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}
