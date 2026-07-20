@@ -16,7 +16,9 @@ class TestHomePage(TestCase, SimpleTestCase):
     def test_homepage_contains_welcome_message_and_have_correct_status_code(self):
         response = self.client.get(reverse("home"))
         self.assertContains(
-            response, "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet", status_code=200
+            response,
+            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            status_code=200,
         )
 
     def test_homepage_with_correct_title(self):

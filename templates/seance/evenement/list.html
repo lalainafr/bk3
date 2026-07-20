@@ -47,11 +47,10 @@
                         </td>
                         <td class="text-center">
                             <small>
-                                <p class="text-muted">
+                                <p class="text-muted" style="width: 80px;">
                                     {{evenement.titre}}
                                 </p>
                             </small>
-                        </td>
                         <td class="text-center">
                             <small>
                                 <p class="text-muted">
@@ -62,10 +61,11 @@
                         <td class="text-center w-50">
                             <small>
                                 <p class="text-muted">
-                                    {{evenement.description}}
+                                    {{evenement.description|truncatewords:25}}
                                 </p>
                             </small>
                         </td>
+
                         <td class="text-center">
                             <small>
                                   <img src="/media/{{ evenement.affiche }}" alt="{{ evenement.titre }}" style="width: 30px;">
