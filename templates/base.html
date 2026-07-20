@@ -25,7 +25,7 @@
         />
         <!-- Google fonts-->
         <link
-            href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+            href="https://fonts.googleapis.com/css?^mily=Merriweather+Sans:400,700"
             rel="stylesheet"
         />
         <link
@@ -40,12 +40,29 @@
         />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body id="page-top">
         <!-- Navigation-->
         {% include 'navbar.html' %}
         <!-- Header-->
         {% block header %} {% endblock header%}
+        <!-- Message  -->
+        {% if messages %} {% for message in messages %}
+        <div
+            class="alert alert-{{message.tags}} alert-dismissible fade show auto-hide shadow-lg rounded-4 opacity-50"
+            role="alert"
+        >
+            {{message}}
+        </div>
+        {% endfor %} {% endif %}
         <!-- Masthead-->
         {% block content %} {% endblock content %}
 
@@ -58,6 +75,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
         <!-- Core theme JS-->
         <script src=" {% static 'js/scripts.js' %}"></script>
+        <script src=" {% static 'js/myscript.js' %}"></script>
+
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

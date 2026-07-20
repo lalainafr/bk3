@@ -1,0 +1,71 @@
+{%extends 'seance/dashboard.html'%} {%load static%} {%load
+widget_tweaks%}{%block content%}
+
+<div class="container">
+    <div class="my-5 ">
+        <h1 class="display-3 fw-bold mb-3 text-secondary mt-4">
+                    Modifier un séance
+    </h1>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Suscipit illum, voluptatem doloremque hic nisi ipsum eum,
+            fuga possimus perspiciatis expedita,
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Suscipit illum, voluptatem doloremque hic nisi ipsum eum,
+            fuga possimus perspiciatis expedita,
+        </p>
+        <br>
+        <div class="d-flex justify-content-center align-items-center">
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="rounded-4 p-4 p-md-5 shadow-lg bg-ligth w-75"
+        >
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form.date.label_tag }} {{ form.date }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.horaire.label_tag }} {{ form.horaire }}
+                    </div>
+                     <div class="mb-3">
+                        {{ form.salle.label_tag }} {{ form.salle }}
+                    </div>
+
+                
+                </div>
+                <div class="col-md-6 ">
+                  <div class="rounded-1 p-5 shadow bg-ligth w-100 ">
+
+                       <div class="mb-3">
+                        {{ form.film.label_tag }} {{ form.film }}
+                    </div>
+                    ou 
+                    <br><br>
+                    <div class="mb-3">
+                        {{ form.evenement.label_tag }} {{ form.evenement }}
+                    </div>
+                  </div>
+                    <!-- <div class="mb-3">
+                        {{ form.place_dispo.label_tag }} {{ form.place_dispo }}
+                    </div> -->
+
+                    <div class="mb-3">
+                        {{ form.prix.label_tag }} {{ form.prix }}
+                    </div>
+
+                    <br />
+                    <button type="submit" class="btn btn-outline-primary">
+                        Modifier
+                    </button>
+                </div>  
+        </form>
+        </div>
+    </div>
+</div>
+
+{%endblock content%}
+<!-- Footer-->

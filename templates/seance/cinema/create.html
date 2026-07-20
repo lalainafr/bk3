@@ -1,0 +1,79 @@
+{%extends 'seance/dashboard.html'%} {%load static%} {%load widget_tweaks%}{%block content%}
+
+<div class="container">
+    <div class="row my-5 py-5">
+        <div class="col-12 col-md-6">
+            <div>
+                <h1 class="display-3 fw-bold mb-3 text-secondary mt-4">Créer cinéma</h1>
+                <br>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
+                    illum, voluptatem doloremque hic nisi ipsum eum, fuga possimus
+                    perspiciatis expedita,
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
+                    illum, voluptatem doloremque hic nisi ipsum eum, fuga possimus
+                    perspiciatis expedita,
+                    illum, voluptatem doloremque hic nisi ipsum eum, fuga possimus
+                    perspiciatis expedita,
+                </p>
+            </div>
+        </div>    
+
+        <div class="col-12 col-md-6">
+            <div class="d-flex justify-content-center ">
+                <form
+                    class="rounded-4 p-4 p-md-5 shadow-lg bg-ligth w-50"
+                    method="POST"
+                >
+                    {%csrf_token%}
+                    <div class="floatingInput mb-3 text-start">
+                        <label for="floatingInput" class="form-label ">Nom</label>
+                        <input
+                            type="text"
+                            name="nom"
+                            class="form-control"
+                            id="floatingInput"
+                        />
+                        <!-- {% render_field form.username class="form-control" %} -->
+                    </div>
+                    <div class="floatingInput mb-3 text-start">
+                        <label for="floatingInput" class="form-label"
+                            >Adresse</label
+                        >
+                        <input
+                            type="text"
+                            name="adresse"
+                            class="form-control"
+                            id="floatingInput"
+                        />
+                        <!-- {% render_field form.password class="form-control" %} -->
+                    </div>
+                    <div class="floatingInput mb-3 text-start">
+                        <label for="floatingInput" class="form-label"
+                            >Telephone</label
+                        >
+                        <input
+                            type="text"
+                            name="telephone"
+                            class="form-control"
+                            id="floatingInput"
+                        />
+                        <!-- {% render_field form.password class="form-control" %} -->
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-outline-primary">
+                        Créer
+                    </button>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+{%endblock content%}
+<!-- Footer-->

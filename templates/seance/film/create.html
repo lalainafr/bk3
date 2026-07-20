@@ -1,0 +1,65 @@
+{%extends 'seance/dashboard.html'%} {%load static%} {%load
+widget_tweaks%}{%block content%}
+
+<div class="container">
+    <div class="my-5 ">
+        <h1 class="display-3 fw-bold mb-3 text-secondary mt-4">
+            Créer film
+        </h1>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Suscipit illum, voluptatem doloremque hic nisi ipsum eum,
+            fuga possimus perspiciatis expedita,
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Suscipit illum, voluptatem doloremque hic nisi ipsum eum,
+            fuga possimus perspiciatis expedita,
+        </p>
+        <br>
+        <div class="d-flex justify-content-center align-items-center">
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="rounded-4 p-4 p-md-5 shadow-lg bg-ligth w-75"
+        >
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form.titre.label_tag }} {{ form.titre }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.duree.label_tag }} {{ form.duree }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.genre.label_tag }} {{ form.genre }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.date_sortie.label_tag }} {{ form.date_sortie }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.realisateur.label_tag }} {{ form.realisateur }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form.description.label_tag }} {{ form.description }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.affiche.label_tag }} {{ form.affiche }}
+                    </div>
+
+                    <br />
+                    <button type="submit" class="btn btn-outline-primary">
+                        Créer
+                    </button>
+                </div>  
+        </form>
+        </div>
+    </div>
+</div>
+
+{%endblock content%}
+<!-- Footer-->

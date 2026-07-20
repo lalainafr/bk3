@@ -1,0 +1,61 @@
+{%extends 'seance/dashboard.html'%} {%load static%} {%load
+widget_tweaks%}{%block content%}
+
+<div class="container">
+    <div class="row my-5 py-5">
+        <div class="col-12 col-md-6">
+            <div>
+                <h1 class="display-3 fw-bold mb-3 text-secondary mt-4">
+                    Créer evenement
+                </h1>
+                <br />
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Suscipit illum, voluptatem doloremque hic nisi ipsum eum,
+                    fuga possimus perspiciatis expedita,
+                </p>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Suscipit illum, voluptatem doloremque hic nisi ipsum eum,
+                    fuga possimus perspiciatis expedita, illum, voluptatem
+                    doloremque hic nisi ipsum eum, fuga possimus perspiciatis
+                    expedita,
+                </p>
+            </div>
+        </div>
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="rounded-4 p-4 p-md-5 shadow-lg bg-ligth w-50"
+        >
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form.titre.label_tag }} {{ form.titre }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.genre.label_tag }} {{ form.genre }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.description.label_tag }} {{ form.description }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.affiche.label_tag }} {{ form.affiche }}
+                    </div>
+
+                    <br />
+                    <button type="submit" class="btn btn-outline-primary">
+                        Créer
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{%endblock content%}
+<!-- Footer-->
