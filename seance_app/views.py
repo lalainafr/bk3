@@ -260,23 +260,41 @@ def create_seance(request):
     if request.method == "POST":
         form = CreateSeanceForm(request.POST)
         if form.is_valid():
-            var = form.save(commit=False)
-            var.place_dispo = var.salle.capacite
-            if var.film:
-                var.programme = "Film"
-                var.prix = 5.00
-            else:
-                var.programme = "Evenement"
-                var.prix = 9.99
-            var.save()
+            
+             # disponibilité salle selon creneau et date choisis     
+            salle = request.POST.get('salle')
+            date = request.POST.get('date')
+            horaire = request.POST.get('horaire')
+            
+            indisponible = Seance.objects.filter(
+                salle = salle,
+                date__date = date,
+                horaire = horaire,
+            ).exists()
+            
+            if indisponible:
+                messages.warning(request, "Cette salle est déjà réservée à cette date et créneau")
+                return redirect("list_seance")
+            else: 
+            
+                var = form.save(commit=False)
 
-            messages.success(request, "La seance a été créée")
-            return redirect("list_seance")
+                var.place_dispo = var.salle.capacite
+                if var.film:
+                    var.programme = "Film"
+                    var.prix = 5.00
+                else:
+                    var.programme = "Evenement"
+                    var.prix = 9.99
+                
+                messages.success(request, "La seance a été créée")
+                
+                var.save()
+
+                return redirect("list_seance")
         else:
-            print(form)
             messages.warning(request, "Echec lors de la création de la seance")
             return redirect("list_seance")
-
     else:
         form = CreateSeanceForm()
         seances = Seance.objects.all()
@@ -290,27 +308,40 @@ def update_seance(request, pk):
     if request.method == "POST":
         form = UpdateSeanceForm(request.POST, instance=seance)
         if form.is_valid():
-            var = form.save(commit=False)
-            var.place_dispo = var.salle.capacite
-            if var.film:
-                var.programme = "Film"
-                var.prix = 5.00
-            else:
-                var.programme = "Evenement"
-                var.prix = 9.99
-            var.save()
-            messages.success(request, "La séance a été modifiée")
-            return redirect("list_seance")
+            
+            # disponibilité salle selon creneau et date choisis     
+            salle = request.POST.get('salle')
+            date = request.POST.get('date')
+            horaire = request.POST.get('horaire')
+            
+            indisponible = Seance.objects.filter(
+                salle = salle,
+                date__date = date,
+                horaire = horaire,
+            ).exists()
+            
+            if indisponible:
+                messages.warning(request, "Cette salle est déjà réservée à cette date et créneau")
+                return redirect("list_seance")
+            else: 
+                var = form.save(commit=False)
+                var.place_dispo = var.salle.capacite
+                if var.film:
+                    var.programme = "Film"
+                    var.prix = 5.00
+                else:
+                    var.programme = "Evenement"
+                    var.prix = 9.99
+                var.save()
+                messages.success(request, "La séance a été modifiée")
+                return redirect("list_seance")
         else:
-
             messages.warning(request, {form})
             return redirect("list_seance")
-
     else:
         form = UpdateSeanceForm(instance=seance)
         context = {"form": form}
         return render(request, "seance/seance/update.html", context)
-
 
 # List seance
 def list_seance(request):
