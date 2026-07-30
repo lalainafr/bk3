@@ -31,7 +31,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="">Dashboard</a>
+                    <a class="nav-link" href="{% url 'list_offer_film' %}">Film</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'list_offer_evenement' %}">Evenement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'list_seance' %}">Dashboard</a>
                 </li>
 
                 <!-- <li class="nav-item">

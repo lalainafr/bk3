@@ -5,10 +5,15 @@ from django.utils import timezone
 from seance_app.views import Seance
 
 
-def list_offer(request):
+def list_offer_film(request):
     seances = Seance.objects.all()
     context = {'seances': seances}
-    return render(request, "offer/list_offer.html", context)
+    return render(request, "offer/list_offer_film.html", context)
+
+def list_offer_evenement(request):
+    seances = Seance.objects.all()
+    context = {'seances': seances}
+    return render(request, "offer/list_offer_evenement.html", context)
 
 # def detail_dispo(request):
 
