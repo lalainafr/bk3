@@ -1,0 +1,19 @@
+{%extends 'base.html'%} {%load static%} {%load widget_tweaks%}{%block content%}
+<section class="container-fluid p-3 my-5 h-100" id="services">
+    <h1 class="display-2 fw-bold lh-1 mb-3 text-light">Séance de film</h1>
+    <br />
+    <div class="d-flex flex-wrap justify-content-start">
+        {% for seance in seances %}
+        <div style="width: 17%" class="p-2 mx-3">
+            <small
+                ><img
+                    src="/media/{{ seance.film.affiche }}"
+                    alt="{{ film.affiche }}"
+                    style="width: 100%"
+                    class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark"
+            /></small>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{%endblock content%}
