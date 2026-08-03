@@ -1,0 +1,38 @@
+{%extends 'base.html'%} {%load static%} {%block content%}
+<div class="container pb-5">
+    <div style="background-color: rgb(212, 191, 191)" class="p-5 rounded-4">
+        <div class="d-flex row">
+            <div class="col-md-6">
+                <h2 class="display-2 fw-bold home-title text-white">
+                    E N T R E Z <br /><br />
+                    R E V E Z <br /><br />
+                    R E S S E N T E Z <br /><br />
+                </h2>
+            </div>
+            <div
+                class="col-md-6 homepage mx-5 shadow-lg bg-dark rounded-4"
+            ></div>
+        </div>
+        <div>
+            <p class="text-white-75 mb-5">
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
+                consectetur, adipisci velit... There is no one who loves pain
+                itself, who seeks after it and wants to have it, simply because
+                it "Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                amet, consectetur, adipisci velit... There is no one who loves
+                pain itself, who seeks after it and wants to have it, simply
+                because it is pain..."
+            </p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a
+                class="btn btn-outline-secondary text-center rounded-3"
+                href="{% url 'list_offer_film' %}"
+                >Démarrer</a
+            >
+        </div>
+    </div>
+</div>
+{%endblock content%}
+
+<!-- Footer-->

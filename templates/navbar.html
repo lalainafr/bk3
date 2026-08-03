@@ -1,95 +1,74 @@
 {% load static %}
-
-<nav
-    class="navbar navbar-expand-lg navbar-light fixed-top py-3 bg-transparent"
-    id="mainNav"
->
-    <!-- box-shadow: 10px 5px 15px rgba(81, 79, 79, 1.8); -->
-    <div class="container px-lg-5">
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+    <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
             <img
                 src=" {% static 'img/logo1.jpg' %}"
                 alt="..."
-                style="width: 12%; height: auto;;"
-                class=" rounded-4  shadow-lg shadow-dark bg-dark opacity-50"
+                style="width: 12%; height: auto"
+                class="rounded-4 shadow-lg shadow-dark bg-dark opacity-50"
             />
         </a>
-
-       
         <button
-            class="navbar-toggler navbar-toggler-right"
+            class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
             aria-expanded="false"
             aria-label="Toggle navigation"
         >
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="">Dashboard</a>
-                </li>
-
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li> -->
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link opacity-75" href="{% url 'logout' %}"
-                        >Logout</a
+                    <a class="nav-link" href="{% url 'list_offer_film' %}"
+                        >Film</a
                     >
                 </li>
                 <li class="nav-item">
-                    <i
-                        class="fa-regular fa-circle-user fa-xl"
-                        style="color: rgb(157, 143, 143)"
-                    ></i>
-                </li>
-                <li class="nav-item">
-                    <p
-                        class="nav-link"
-                        style="font-size: 10px; color: rgb(157, 143, 143)"
-                    >
-                        {{user.first_name}} {{user.last_name | upper}}
-                    </p>
-                </li>
-
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link opacity-75" href="{% url 'login' %}"
-                        >Login</a
+                    <a class="nav-link" href="{% url 'list_offer_evenement' %}"
+                        >Evenement</a
                     >
                 </li>
-                <li class="nav-item">
-                    <i
-                        class="fa-regular fa-circle-user fa-xl"
-                        style="color: rgb(157, 143, 143)"
-                    ></i>
+                <li class="nav-item"></li>
+                  <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="navbarDropdownMenuLink"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                    <b>Dashboard</b>
+                    </a>
+                    <div
+                        class="dropdown-menu"
+                        aria-labelledby="navbarDropdownMenuLink"
+                    >
+                        <a class="dropdown-item" href="{% url 'list_cinema' %}"
+                            >Cinema</a
+                        >
+                        <a class="dropdown-item" href="{% url 'list_salle' %}"
+                            >Salle</a
+                        >
+                        <a class="dropdown-item" href="{% url 'list_film' %}"
+                            >Film</a
+                        >
+                        <a
+                            class="dropdown-item"
+                            href="{% url 'list_evenement' %}"
+                            >Evenement</a
+                        >
+                        <a class="dropdown-item" href="{% url 'list_seance' %}"
+                            >Seance</a
+                        >
+                    </div>
                 </li>
-                {% endif %}
+                </li>
             </ul>
         </div>
     </div>
 </nav>
-
-
-<section class="masthead">
-    <div class="container px-4 px-lg-5 h-100" background-image: url("img/bg-masthead.jpg")>
-        <div
-            class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"
-        >
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".auto-hide").forEach(function (alert) {
-            setTimeout(function () {
-                const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-                bsAlert.close();
-            }, 5000);
-        });
-    });
-</script>

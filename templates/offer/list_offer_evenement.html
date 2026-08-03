@@ -1,0 +1,59 @@
+{%extends 'base.html'%} {%load static%} {%load widget_tweaks%} 
+{% block heading%}
+    <div class="jumbotron">
+ <h1 class="display-3 fw-bold lh-1 mb-3 text-secondary">
+       Liste des evenements
+    </h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.his is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information</p>
+  <hr class="my-4">
+</div>
+{% endblock heading%}
+{%block content%}
+<section class="h-100 container-fluid mx-3">
+    <div class="d-flex flex-wrap justify-content-start align-items-start gap-2">
+        {% for evenement, seances in evenements %}
+        <div class="row mb-5">
+            <h3 class="display-5 lh-1 mb-3 text-secondary film-title opacity-50">
+                {{evenement}}
+            </h3>
+            <div class="row rounded-4 border bg-white shadow-lg bg-dark p-3">
+                <div class="col-md-3 text-center">
+                    <img
+                        src="{{ evenement.affiche.url}}"
+                        alt="{{ evenement.affiche }}"
+                        style="width: 80%"
+                        class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark"
+                    />
+                </div>
+                <div class="col-md-4">
+                   <p>
+                    <b>Description:</b><br />
+                    <span class="text-muted"> {{evenement.description}}</span><br />
+                    </p><br>
+                    <p>
+                        <b>Prix d'entrée:</b><br />
+                    <span class="text-muted"> {{prix}}</span>€<br />
+                    </p>
+                </div>
+                <div class="col-md-2 px-5">
+                    <b>Genre:</b><br />
+                    <span class="text-muted"> {{evenement.genre}}</span><br />
+                </p>
+                </div>
+                <div class="col-md-3 border bg-white shadow bg-dark p-4 rounded-2">
+                    <h6><b>Date disponibles:</b></h6>
+                    {% for seance in seances %}
+                    <p>
+                        {{seance.date|date:"d/m/Y"}} à {{seance.horaire}} <br />
+                        <span class="text-petit text-muted">
+                            Il reste {{seance.place_dispo}} places
+                        </span>
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{%endblock content%}
