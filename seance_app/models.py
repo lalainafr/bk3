@@ -77,4 +77,4 @@ class Seance(models.Model):
     prix = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return f"séance du {self.date} à {self.heure}"
+        return f"séance du {self.date} à {self.horaire}"

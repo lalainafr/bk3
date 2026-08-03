@@ -1,8 +1,14 @@
-{% extends 'seance/dashboard.html'%} {% block content%}
+{% extends 'base.html'%} {% block content%}
 
-<div class="container my-2 py-1">
+<div class="container">
     <h1 class="display-3 fw-bold mb-3 text-secondary">Liste des seances</h1>
     <br />
+    <p>
+        Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor eu
+        interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
+        adipiscing elit. Ad elit dolor eu interdum etiam maecenas quam.
+        <br />
+    </p>
     <a href="{% url 'create_seance' %}" style="text-decoration: none">
         <i class="fa-solid fa-circle-arrow-right text-info"></i>
         <span class="text-info"> Créer seance </span>
@@ -95,7 +101,7 @@
                                 >
                                     <button
                                         type="button"
-                                        class="btn btn-sm btn-outline-primary rounded-4"
+                                        class="btn btn-sm btn-outline-primary rounded-4 text-petit"
                                     >
                                         Modifier
                                     </button>
@@ -106,7 +112,7 @@
                                 >
                                     <button
                                         type="button"
-                                        class="btn btn-sm btn-outline-danger rounded-4"
+                                        class="btn btn-sm btn-outline-danger rounded-4 text-petit"
                                     >
                                         Effacer
                                     </button>

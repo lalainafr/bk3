@@ -1,4 +1,4 @@
-{% extends 'seance/dashboard.html'%} {% block content %}
+{% extends 'base.html'%} {% block content %}
 <div class="container">
     <div class="border p-4 bg-light shadow-lg m-5 bg-white rounded">
         <div class="row">
@@ -36,7 +36,7 @@
                 </p>
 
                 <div class="pt-3">
-                    <small> <b>Numero</b>: {{film.id}} </small>
+                    <small> <b>Id</b>: {{film.id}} </small>
                     <br />
                     <br />
                     <small> <b>Réalisateur</b>: {{film.realisateur}} </small>
