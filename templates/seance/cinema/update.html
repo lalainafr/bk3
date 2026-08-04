@@ -24,51 +24,31 @@
 
         <div class="col-md-6">
             <div class="d-flex justify-content-center ">
-                <form
-                    class="rounded-4 p-4 p-md-5 shadow-lg bg-light"
-                    method="POST"
-                >
-                    {%csrf_token%}
-                    <div class="floatingInput mb-3 text-start">
-                        <label for="floatingInput" class="form-label ">Nom</label>
-                        <input
-                            type="text"
-                            name="nom"
-                            class="form-control"
-                            id="floatingInput"
-                        />
-                        <!-- {% render_field form.username class="form-control" %} -->
-                    </div>
-                    <div class="floatingInput mb-3 text-start">
-                        <label for="floatingInput" class="form-label"
-                            >Adresse</label
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-center">
+                        <form
+                            method="POST"
+                            class="rounded-4 p-4 p-md-5 shadow-lg bg-ligth"
                         >
-                        <input
-                            type="text"
-                            name="adresse"
-                            class="form-control"
-                            id="floatingInput"
-                        />
-                        <!-- {% render_field form.password class="form-control" %} -->
-                    </div>
-                    <div class="floatingInput mb-3 text-start">
-                        <label for="floatingInput" class="form-label"
-                            >Telephone</label
-                        >
-                        <input
-                            type="text"
-                            name="telephone"
-                            class="form-control"
-                            id="floatingInput"
-                        />
-                        <!-- {% render_field form.password class="form-control" %} -->
-                    </div>
-                    <br>
+                            {% csrf_token %}
 
-                    <button type="submit" class="btn btn-outline-primary">
-                        Modifier
-                    </button>
+                            <div class="mb-3">
+                                {{ form.nom.label_tag }} {{ form.nom }}
+                            </div>
 
+                            <div class="mb-3">
+                                {{ form.adresse.label_tag }} {{ form.adresse }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.telephone.label_tag }} {{ form.telephone }}
+                            </div>
+                            <br />
+                            <button type="submit" class="btn btn-outline-primary">
+                                Modifier
+                            </button>
+                        </form>
+                    </div>
+                </div>  
             </div>
         </div>
     </div>

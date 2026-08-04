@@ -3,10 +3,9 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
             <img
-                src=" {% static 'img/logo1.jpg' %}"
+                src=" {% static 'img/image.png' %}"
                 alt="..."
-                style="width: 12%; height: auto"
-                class="rounded-4 shadow-lg shadow-dark bg-dark opacity-50"
+                style="width: 50px; height: auto"
             />
         </a>
         <button
@@ -33,7 +32,14 @@
                     >
                 </li>
                 <li class="nav-item"></li>
-                  <li class="nav-item dropdown">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                    <i class="fa-solid fa-circle-user"></i> &nbsp;
+                    <span class="text-petit text-muted"> Username </span>
+                </li>
+                <li class="nav-item dropdown">
                     <a
                         class="nav-link dropdown-toggle"
                         href="#"
@@ -42,7 +48,7 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                    <b>Dashboard</b>
+                        <b>Dashboard</b>
                     </a>
                     <div
                         class="dropdown-menu"
@@ -66,7 +72,6 @@
                             >Seance</a
                         >
                     </div>
-                </li>
                 </li>
             </ul>
         </div>

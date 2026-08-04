@@ -47,8 +47,10 @@ def update_cinema(request, pk):
             messages.success(request, "Le cinema a été modifiée")
             return redirect("list_cinema")
         else:
+
             messages.warning(request, {form})
             return redirect("list_cinema")
+
     else:
         form = UpdateCinemaForm(instance=cinema)
         context = {"form": form}

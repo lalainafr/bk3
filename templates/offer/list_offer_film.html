@@ -17,13 +17,11 @@
     <div class="d-flex flex-wrap justify-content-start align-items-start gap-2">
         {% for film, seances in films %}
         <div class="row mb-5">
-            <h3
-                class="display-5 lh-1 mb-3 text-secondary film-title opacity-50"
-            >
+            <h3 class="display-5 lh-1 mb-3 text-secondary archivo opacity-50">
                 {{film}}
             </h3>
             <div class="row rounded-4 border bg-white shadow-lg bg-dark p-4">
-                <div class="col-md-3 text-center">
+                <div class="col-md-12 col-lg-3 text-center mb-3">
                     <img
                         src="{{ film.affiche.url}}"
                         alt="{{ film.affiche }}"
@@ -31,7 +29,7 @@
                         class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark"
                     />
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-12 col-lg-3">
                     <p>
                         <b>Description:</b><br />
                         <span class="text-muted"> {{film.description}}</span
@@ -42,7 +40,7 @@
                         <span class="text-muted"> {{prix}}</span>€<br />
                     </p>
                 </div>
-                <div class="col-md-3 px-5">
+                <div class="col-md-12 col-lg-3">
                     <p>
                         <b>Réalisateur:</b><br />
                         <span class="text-muted"> {{film.realisateur}}</span
@@ -63,7 +61,7 @@
                     </p>
                 </div>
                 <div
-                    class="col-md-3 border bg-white shadow bg-dark p-4 rounded-2"
+                    class="col-md-12 col-lg-3 border bg-white shadow bg-dark rounded-2 py-3"
                 >
                     <h6><b>Date disponibles:</b></h6>
                     {% for seance in seances %}

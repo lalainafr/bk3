@@ -17,85 +17,92 @@
     <div>
         <div class="card shadow-lg p-2 mb-5">
             <div class="card-body p-5">
-                <table class="table">
-                    <thead>
-                        <tr class="text-center text-secondary">
-                            <th scope="col">id</th>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Genre</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Affiche</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    {% for evenement in evenements %}
-                    <tbody>
-                        <tr>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">{{evenement.id}}</p>
-                                </small>
-                            </td>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted" style="width: 80px">
-                                        {{evenement.titre}}
-                                    </p>
-                                </small>
-                            </td>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center text-secondary">
+                                <th scope="col">id</th>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Genre</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Affiche</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        {% for evenement in evenements %}
+                        <tbody>
+                            <tr>
+                                <td class="text-center">
+                                    <small>
+                                        <p class="text-muted">
+                                            {{evenement.id}}
+                                        </p>
+                                    </small>
+                                </td>
+                                <td class="text-center">
+                                    <small>
+                                        <p
+                                            class="text-muted"
+                                            style="width: 80px"
+                                        >
+                                            {{evenement.titre}}
+                                        </p>
+                                    </small>
+                                </td>
 
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">
-                                        {{evenement.genre}}
-                                    </p>
-                                </small>
-                            </td>
-                            <td class="text-center w-50">
-                                <small>
-                                    <p class="text-muted">
-                                        {{evenement.description|truncatewords:25}}
-                                    </p>
-                                </small>
-                            </td>
+                                <td class="text-center">
+                                    <small>
+                                        <p class="text-muted">
+                                            {{evenement.genre}}
+                                        </p>
+                                    </small>
+                                </td>
+                                <td class="text-center w-50">
+                                    <small>
+                                        <p class="text-muted">
+                                            {{evenement.description|truncatewords:25}}
+                                        </p>
+                                    </small>
+                                </td>
 
-                            <td class="text-center">
-                                <small>
-                                    <img
-                                        src="/media/{{ evenement.affiche }}"
-                                        alt="{{ evenement.titre }}"
-                                        style="width: 30px"
-                                    />
-                                </small>
-                            </td>
-                            <td class="text-center w-25">
-                                <a
-                                    href="{% url 'update_evenement' evenement.id %}"
-                                    style="text-decoration: none"
-                                >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-primary rounded-4 text-petit"
+                                <td class="text-center">
+                                    <small>
+                                        <img
+                                            src="/media/{{ evenement.affiche }}"
+                                            alt="{{ evenement.titre }}"
+                                            style="width: 30px"
+                                        />
+                                    </small>
+                                </td>
+                                <td class="text-center w-25">
+                                    <a
+                                        href="{% url 'update_evenement' evenement.id %}"
+                                        style="text-decoration: none"
                                     >
-                                        Modifier
-                                    </button>
-                                </a>
-                                <a
-                                    href="{% url 'delete_evenement' evenement.id %}"
-                                    style="text-decoration: none"
-                                >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-danger rounded-4 text-petit"
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-outline-primary rounded-4 text-petit"
+                                        >
+                                            Modifier
+                                        </button>
+                                    </a>
+                                    <a
+                                        href="{% url 'delete_evenement' evenement.id %}"
+                                        style="text-decoration: none"
                                     >
-                                        Effacer
-                                    </button>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-outline-danger rounded-4 text-petit"
+                                        >
+                                            Effacer
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
