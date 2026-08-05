@@ -217,6 +217,13 @@ def create_evenement(request):
         context = {"form": form}
         return render(request, "seance/evenement/create.html", context)
 
+# Detail evenement
+def detail_evenement(request, pk):
+    evenement = Evenement.objects.get(pk=pk)
+    context = {"evenement": evenement}
+    return render(request, "seance/evenement/details.html", context)
+
+
 
 # Edit evenement
 def update_evenement(request, pk):

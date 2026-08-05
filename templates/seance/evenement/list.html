@@ -1,111 +1,136 @@
-{% extends 'base.html'%} {% block content%}
-
-<div class="container">
-    <h1 class="display-3 fw-bold mb-3 text-secondary">Liste des evenements</h1>
-    <br />
-    <p>
-        Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor eu
-        interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
-        adipiscing elit. Ad elit dolor eu interdum etiam maecenas quam.
-        <br />
-    </p>
-    <a href="{% url 'create_evenement' %}" style="text-decoration: none">
-        <i class="fa-solid fa-circle-arrow-right text-info"></i>
-        <span class="text-info"> Créer evenement </span>
-    </a>
-    <br /><br />
-    <div>
-        <div class="card shadow-lg p-2 mb-5">
-            <div class="card-body p-5">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr class="text-center text-secondary">
-                                <th scope="col">id</th>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Genre</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Affiche</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
+{% extends 'base.html' %} {% block content %}
+<div class="container py-4">
+    <!-- Titre -->
+    <div class="mb-4">
+        <h1 class="display-3 fw-bold text-secondary">Liste des événement</h1>
+        <p class="text-muted">
+            Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor
+            eu interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
+            adipiscing elit.
+        </p>
+        <a href="{% url 'create_evenement' %}" class="text-decoration-none">
+            <i class="fa-solid fa-circle-arrow-right text-info"></i>
+            <span class="text-info">Créer evenement</span>
+        </a>
+    </div>
+    <!-- Card -->
+    <div class="card shadow-lg border-0 mb-5">
+        <div class="card-body p-2 p-md-4 p-lg-5">
+            <!-- Tableau responsive -->
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="text-center text-secondary">
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                ID
+                            </th>
+                            <th scope="col" class="titre-evenement">Titre</th>
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                Genre
+                            </th>
+                            <th
+                                scope="col"
+                                class="description-column hide-element-mobile hide-element-tablette"
+                            >
+                                Description
+                            </th>
+                            <th scope="col" class="affiche-evenement">
+                                Affiche
+                            </th>
+                            <th scope="col" class="action-evenement">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {% for evenement in evenements %}
-                        <tbody>
-                            <tr>
-                                <td class="text-center">
-                                    <small>
-                                        <p class="text-muted">
-                                            {{evenement.id}}
-                                        </p>
-                                    </small>
-                                </td>
-                                <td class="text-center">
-                                    <small>
-                                        <p
-                                            class="text-muted"
-                                            style="width: 80px"
-                                        >
-                                            {{evenement.titre}}
-                                        </p>
-                                    </small>
-                                </td>
-
-                                <td class="text-center">
-                                    <small>
-                                        <p class="text-muted">
-                                            {{evenement.genre}}
-                                        </p>
-                                    </small>
-                                </td>
-                                <td class="text-center w-50">
-                                    <small>
-                                        <p class="text-muted">
-                                            {{evenement.description|truncatewords:25}}
-                                        </p>
-                                    </small>
-                                </td>
-
-                                <td class="text-center">
-                                    <small>
-                                        <img
-                                            src="/media/{{ evenement.affiche }}"
-                                            alt="{{ evenement.titre }}"
-                                            style="width: 30px"
-                                        />
-                                    </small>
-                                </td>
-                                <td class="text-center w-25">
+                        <tr>
+                            <!-- ID -->
+                            <td
+                                class="text-center hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ evenement.id }}
+                                </span>
+                            </td>
+                            <!-- Titre -->
+                            <td class="text-center evenement-title">
+                                <span class="text-muted titre-evenement">
+                                    {{ evenement.titre }}
+                                </span>
+                            </td>
+                            <!-- Genre -->
+                            <td
+                                class="text-center hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="badge bg-secondary">
+                                    {{ evenement.genre }}
+                                </span>
+                            </td>
+                            <!-- Description -->
+                            <td
+                                class="text-center description-column hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ evenement.description|truncatewords:25 }}
+                                </span>
+                            </td>
+                            <!-- Affiche -->
+                            <td class="text-center affiche-evenement">
+                                {% if evenement.affiche %}
+                                <img
+                                    src="{{ evenement.affiche.url }}"
+                                    alt="{{ evenement.titre }}"
+                                    class="evenement-poster rounded shadow-sm"
+                                />
+                                {% else %}
+                                <span class="text-muted"> Aucune image </span>
+                                {% endif %}
+                            </td>
+                            <!-- Actions -->
+                            <td class="text-center action-evenement">
+                                <div
+                                    class="d-flex flex-wrap justify-content-center gap-1"
+                                >
                                     <a
                                         href="{% url 'update_evenement' evenement.id %}"
-                                        style="text-decoration: none"
                                     >
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm btn-outline-primary rounded-4 text-petit"
-                                        >
-                                            Modifier
-                                        </button>
+                                        <i
+                                            class="fa-solid fa-pen-to-square fa-xs"
+                                        ></i>
                                     </a>
                                     <a
                                         href="{% url 'delete_evenement' evenement.id %}"
-                                        style="text-decoration: none"
                                     >
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm btn-outline-danger rounded-4 text-petit"
-                                        >
-                                            Effacer
-                                        </button>
+                                        <i
+                                            class="fa-solid fa-trash fa-xs text-danger"
+                                        ></i>
                                     </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                                    <a
+                                        href="{% url 'detail_evenement' evenement.id %}"
+                                    >
+                                        <i
+                                            class="fa-solid fa-eye fa-xs text-secondary"
+                                        ></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                Aucun evenement disponible.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
-
-{%endblock content%}
+{% endblock content %}

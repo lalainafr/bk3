@@ -25,6 +25,7 @@
                             <th scope="col">Date</th>
                             <th scope="col">Creneau</th>
                             <th scope="col">Titre</th>
+                            <th scope="col">Affiche</th>
                             <th scope="col">Programme</th>
                             <th scope="col">Place dispo</th>
                             <th scope="col">Prix</th>
@@ -56,10 +57,20 @@
                                     <p class="text-muted">{{seance.horaire}}</p>
                                 </small>
                             </td>
+
                             {% if seance.film %}
                             <td class="text-center">
                                 <small>
                                     <p class="text-muted">{{seance.film}}</p>
+                                </small>
+                            </td>
+                            <td class="text-center">
+                                <small>
+                                    <img
+                                        src="{{ seance.film.affiche.url}}"
+                                        alt="{{ film.affiche }}"
+                                        class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark film-poster"
+                                    />
                                 </small>
                             </td>
                             <td class="text-center">
@@ -73,6 +84,15 @@
                                     <p class="text-muted">
                                         {{seance.evenement}}
                                     </p>
+                                </small>
+                            </td>
+                            <td class="text-center">
+                                <small>
+                                    <img
+                                        src="{{ seance.evenement.affiche.url}}"
+                                        alt="{{ film.affiche }}"
+                                        class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark film-poster"
+                                    />
                                 </small>
                             </td>
                             <td class="text-center">

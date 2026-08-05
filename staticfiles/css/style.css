@@ -2,12 +2,6 @@
     font-size: 8px;
 }
 
-.archivo {
-  font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
 
 .home-title{
     font-family: "Orbitron", sans-serif;
@@ -27,8 +21,142 @@
     opacity: 0.8;
 }
 
-*{
-  font-family: "Roboto", sans-serif;
-    font-size: 2vh;
+/* FONTS */
+
+.archivo {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
+*{
+  font-family: "Roboto", sans-serif;
+    font-size: 1.5vh;
+}
+
+
+
+/* ---- R E S P O N S I V E ---- */
+
+/* ========================= DESKTOP ========================= */
+  /* LIST FILM */
+    .film-poster {
+        width: 45px;
+        height: 60px;
+        object-fit: cover;
+    }
+    .film-title {
+        min-width: 120px;
+    }
+    .description-column {
+        min-width: 250px;
+    } 
+
+    /* FOOTER & HEADER */
+    .logo-responsive {
+    width: 50px;
+    height: auto;
+    display: block;
+    max-width: 1200px;
+    }
+
+    /* LIST FILM & EVENEMENT */
+    .affiche-responsive {
+    width: 140px;
+    }
+
+
+/* ========================= TABLETTE Écran inférieur à 992px ========================= */
+    @media (max-width: 991.98px) {
+    /* LIST FILM */
+        .container {
+            max-width: 95%;
+        }
+        .card-body {
+            padding: 1.5rem !important;
+        }
+        .display-3 {
+            font-size: 2.5rem;
+        }
+        .description-column {
+            min-width: 200px;
+        }
+        .film-poster {
+            width: 40px;
+            height: 55px;
+        }
+        .btn {
+            font-size: 0.8rem;
+        }
+        .card{
+            width: 100%;
+        }
+        table {
+            min-width: 300px;
+        }
+        .hide-element-tablette {
+            display: none;
+        }
+
+         /* FOOTER & HEADER */
+        .logo-responsive {
+        width: 50px;
+        margin: auto;
+        }
+         /* LIST FILM & EVENEMENT */
+        .affiche-responsive {
+        width: 140px;
+        }
+    } 
+    
+/* ========================= MOBILE Écran inférieur à 768px ========================= */
+    @media (max-width: 767.98px) {
+    /* LIST FILM */
+        .display-3 {
+            font-size: 1.7rem;
+        } /* On cache la description pour éviter un tableau beaucoup trop large. */
+        .description-column {
+            display: none;
+        }
+        table {
+            min-width: 200px;
+        }
+        .hide-element-mobile {
+            display: none;
+        }
+        .btn {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .film-poster {
+            width: 30px;
+            height: 45px;
+        }
+        .card{
+            width: 100%;
+        }
+        .titre-film{
+            width: 20px;
+        }
+        .affiche-film{
+            width: 20px;
+        }
+        .action-film{
+            width: 20px;
+        }
+    
+    /* FOOTER & HEADER */
+        .logo-responsive {
+        width: 30px;
+        margin: auto;
+        }
+
+    /* LIST FILM & EVENEMENT */
+        .affiche-responsive {
+        width: 80px;
+        }
+    }

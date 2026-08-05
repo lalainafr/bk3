@@ -1,105 +1,119 @@
-{% extends 'base.html'%} {% block content%}
-
-<div class="container">
-    <h1 class="display-3 fw-bold mb-3 text-secondary">Liste des films</h1>
-    <br />
-    <p>
-        Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor eu
-        interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
-        adipiscing elit. Ad elit dolor eu interdum etiam maecenas quam.
-        <br />
-    </p>
-
-    <a href="{% url 'create_film' %}" style="text-decoration: none">
-        <i class="fa-solid fa-circle-arrow-right text-info"></i>
-        <span class="text-info"> Créer Film </span>
-    </a>
-    <br /><br />
-    <div>
-        <div class="card shadow-lg p-2 mb-5">
-            <div class="card-body p-5">
-                <table class="table">
+{% extends 'base.html' %} {% block content %}
+<div class="container py-4">
+    <!-- Titre -->
+    <div class="mb-4">
+        <h1 class="display-3 fw-bold text-secondary">Liste des films</h1>
+        <p class="text-muted">
+            Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor
+            eu interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
+            adipiscing elit.
+        </p>
+        <a href="{% url 'create_film' %}" class="text-decoration-none">
+            <i class="fa-solid fa-circle-arrow-right text-info"></i>
+            <span class="text-info">Créer Film</span>
+        </a>
+    </div>
+    <!-- Card -->
+    <div class="card shadow-lg border-0 mb-5">
+        <div class="card-body p-2 p-md-4 p-lg-5">
+            <!-- Tableau responsive -->
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
                     <thead>
                         <tr class="text-center text-secondary">
-                            <th scope="col">id</th>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Genre</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Affiche</th>
-                            <th scope="col">Action</th>
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                ID
+                            </th>
+                            <th scope="col" class="titre-film">Titre</th>
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                Genre
+                            </th>
+                            <th
+                                scope="col"
+                                class="description-column hide-element-mobile hide-element-tablette"
+                            >
+                                Description
+                            </th>
+                            <th scope="col" class="affiche-film">Affiche</th>
+                            <th scope="col" class="action-film">Action</th>
                         </tr>
                     </thead>
-                    {% for film in films %}
                     <tbody>
+                        {% for film in films %}
                         <tr>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">{{film.id}}</p>
-                                </small>
+                            <!-- ID -->
+                            <td
+                                class="text-center hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted"> {{ film.id }} </span>
                             </td>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted" style="width: 80px">
-                                        {{film.titre}}
-                                    </p>
-                                </small>
+                            <!-- Titre -->
+                            <td class="text-center film-title">
+                                <span class="text-muted titre-film">
+                                    {{ film.titre }}
+                                </span>
                             </td>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">{{film.genre}}</p>
-                                </small>
+                            <!-- Genre -->
+                            <td
+                                class="text-center hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="badge bg-secondary">
+                                    {{ film.genre }}
+                                </span>
                             </td>
-
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">
-                                        {{film.description|truncatewords:25}}
-                                    </p>
-                                </small>
+                            <!-- Description -->
+                            <td
+                                class="text-center description-column hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ film.description|truncatewords:25 }}
+                                </span>
                             </td>
-                            <td class="text-center">
-                                <small>
-                                    <img
-                                        src="/media/{{ film.affiche }}"
-                                        alt="{{ film.affiche }}"
-                                        style="width: 30px"
-                                    />
-                                </small>
+                            <!-- Affiche -->
+                            <td class="text-center affiche-film">
+                                {% if film.affiche %}
+                                <img
+                                    src="{{ film.affiche.url }}"
+                                    alt="{{ film.titre }}"
+                                    class="film-poster rounded shadow-sm"
+                                />
+                                {% else %}
+                                <span class="text-muted"> Aucune image </span>
+                                {% endif %}
                             </td>
-                            <td class="text-center w-25">
-                                <a
-                                    href="{% url 'update_film' film.id %}"
-                                    style="text-decoration: none"
+                            <!-- Actions -->
+                            <td class="text-center action-film">
+                                <div
+                                    class="d-flex flex-wrap justify-content-center gap-1"
                                 >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-primary rounded-4 text-petit"
-                                    >
-                                        Modifier
-                                    </button>
-                                </a>
-                                <a
-                                    href="{% url 'delete_film' film.id %}"
-                                    style="text-decoration: none"
-                                >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-danger rounded-4 text-petit"
-                                    >
-                                        Effacer
-                                    </button>
-                                </a>
-                                <a
-                                    href="{% url 'detail_film' film.id %}"
-                                    style="text-decoration: none"
-                                >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-success rounded-4 text-petit"
-                                    >
-                                        Detail
-                                    </button>
-                                </a>
+                                    <a href="{% url 'update_film' film.id %}">
+                                        <i
+                                            class="fa-solid fa-pen-to-square fa-xs"
+                                        ></i>
+                                    </a>
+                                    <a href="{% url 'delete_film' film.id %}">
+                                        <i
+                                            class="fa-solid fa-trash fa-xs text-danger"
+                                        ></i>
+                                    </a>
+                                    <a href="{% url 'detail_film' film.id %}">
+                                        <i
+                                            class="fa-solid fa-eye fa-xs text-secondary"
+                                        ></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                Aucun film disponible.
                             </td>
                         </tr>
                         {% endfor %}
@@ -109,4 +123,4 @@
         </div>
     </div>
 </div>
-{%endblock content%}
+{% endblock content %}

@@ -26,6 +26,7 @@ urlpatterns = [
     # evenement
     path("create-evenement/", views.create_evenement, name="create_evenement"),
     path("update-evenement/<str:pk>", views.update_evenement, name="update_evenement"),
+    path("detail-evenement/<str:pk>", views.detail_evenement, name="detail_evenement"),
     path("list-evenement/", views.list_evenement, name="list_evenement"),
     path("delete-evenement/<str:pk>", views.delete_evenement, name="delete_evenement"),
 ]
