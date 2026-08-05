@@ -34,13 +34,14 @@
                             >
                                 Genre
                             </th>
+                            <th scope="col" class="affiche-film">Affiche</th>
                             <th
                                 scope="col"
                                 class="description-column hide-element-mobile hide-element-tablette"
                             >
                                 Description
                             </th>
-                            <th scope="col" class="affiche-film">Affiche</th>
+
                             <th scope="col" class="action-film">Action</th>
                         </tr>
                     </thead>
@@ -67,6 +68,18 @@
                                     {{ film.genre }}
                                 </span>
                             </td>
+                            <!-- Affiche -->
+                            <td class="text-center affiche-film">
+                                {% if film.affiche %}
+                                <img
+                                    src="{{ film.affiche.url }}"
+                                    alt="{{ film.affiche }}"
+                                    class="film-poster rounded shadow-sm"
+                                />
+                                {% else %}
+                                <span class="text-muted"> Aucune image </span>
+                                {% endif %}
+                            </td>
                             <!-- Description -->
                             <td
                                 class="text-center description-column hide-element-mobile hide-element-tablette"
@@ -75,18 +88,7 @@
                                     {{ film.description|truncatewords:25 }}
                                 </span>
                             </td>
-                            <!-- Affiche -->
-                            <td class="text-center affiche-film">
-                                {% if film.affiche %}
-                                <img
-                                    src="{{ film.affiche.url }}"
-                                    alt="{{ film.titre }}"
-                                    class="film-poster rounded shadow-sm"
-                                />
-                                {% else %}
-                                <span class="text-muted"> Aucune image </span>
-                                {% endif %}
-                            </td>
+
                             <!-- Actions -->
                             <td class="text-center action-film">
                                 <div

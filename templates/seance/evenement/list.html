@@ -2,7 +2,7 @@
 <div class="container py-4">
     <!-- Titre -->
     <div class="mb-4">
-        <h1 class="display-3 fw-bold text-secondary">Liste des événement</h1>
+        <h1 class="display-3 fw-bold text-secondary">Liste des evenements</h1>
         <p class="text-muted">
             Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor
             eu interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
@@ -10,7 +10,7 @@
         </p>
         <a href="{% url 'create_evenement' %}" class="text-decoration-none">
             <i class="fa-solid fa-circle-arrow-right text-info"></i>
-            <span class="text-info">Créer evenement</span>
+            <span class="text-info">Créer Evenement</span>
         </a>
     </div>
     <!-- Card -->
@@ -27,23 +27,21 @@
                             >
                                 ID
                             </th>
-                            <th scope="col" class="titre-evenement">Titre</th>
+                            <th scope="col" class="titre-film">Titre</th>
                             <th
                                 scope="col"
                                 class="hide-element-mobile hide-element-tablette"
                             >
                                 Genre
                             </th>
+                            <th scope="col" class="affiche-film">Affiche</th>
                             <th
                                 scope="col"
                                 class="description-column hide-element-mobile hide-element-tablette"
                             >
                                 Description
                             </th>
-                            <th scope="col" class="affiche-evenement">
-                                Affiche
-                            </th>
-                            <th scope="col" class="action-evenement">Action</th>
+                            <th scope="col" class="action-film">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,8 +56,8 @@
                                 </span>
                             </td>
                             <!-- Titre -->
-                            <td class="text-center evenement-title">
-                                <span class="text-muted titre-evenement">
+                            <td class="text-center film-title">
+                                <span class="text-muted titre-film">
                                     {{ evenement.titre }}
                                 </span>
                             </td>
@@ -71,6 +69,18 @@
                                     {{ evenement.genre }}
                                 </span>
                             </td>
+                            <!-- Affiche -->
+                            <td class="text-center affiche-film">
+                                {% if evenement.affiche %}
+                                <img
+                                    src="{{ evenement.affiche.url }}"
+                                    alt="{{ evenement.affiche }}"
+                                    class="film-poster rounded shadow-sm"
+                                />
+                                {% else %}
+                                <span class="text-muted"> Aucune image </span>
+                                {% endif %}
+                            </td>
                             <!-- Description -->
                             <td
                                 class="text-center description-column hide-element-mobile hide-element-tablette"
@@ -79,20 +89,9 @@
                                     {{ evenement.description|truncatewords:25 }}
                                 </span>
                             </td>
-                            <!-- Affiche -->
-                            <td class="text-center affiche-evenement">
-                                {% if evenement.affiche %}
-                                <img
-                                    src="{{ evenement.affiche.url }}"
-                                    alt="{{ evenement.titre }}"
-                                    class="evenement-poster rounded shadow-sm"
-                                />
-                                {% else %}
-                                <span class="text-muted"> Aucune image </span>
-                                {% endif %}
-                            </td>
+
                             <!-- Actions -->
-                            <td class="text-center action-evenement">
+                            <td class="text-center action-film">
                                 <div
                                     class="d-flex flex-wrap justify-content-center gap-1"
                                 >
@@ -123,7 +122,7 @@
                         {% empty %}
                         <tr>
                             <td colspan="6" class="text-center text-muted py-4">
-                                Aucun evenement disponible.
+                                Aucun film disponible.
                             </td>
                         </tr>
                         {% endfor %}
