@@ -310,6 +310,13 @@ def create_seance(request):
         context = {"form": form, "seances": seances}
         return render(request, "seance/seance/create.html", context)
 
+# Detail seance
+def detail_seance(request, pk):
+    seance = Seance.objects.get(pk=pk)
+    context = {"seance": seance}
+    return render(request, "seance/seance/details.html", context)
+
+
 
 # Edit seance
 def update_seance(request, pk):

@@ -35,10 +35,28 @@
 }
 
 
+/* Tableau */
+.table-uniform {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-uniform th,
+.table-uniform td {
+    width: 10%;              /* 10 colonnes = 10 % chacune */
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 /* ---- R E S P O N S I V E ---- */
 
 /* ========================= DESKTOP ========================= */
+
+  
   /* LIST FILM */
     .film-poster {
         width: 45px;
@@ -51,6 +69,7 @@
     .description-column {
         min-width: 250px;
     } 
+
 
     /* FOOTER & HEADER */
     .logo-responsive {
@@ -145,10 +164,36 @@
         .affiche-film{
             width: 20px;
         }
-        .action-film{
+        .action-film {
             width: 20px;
         }
-    
+     
+
+    /* LIST SEANCE   */
+       .action-seance {
+            width: 20px;
+        }
+       .salle-seance {
+            width: 20px;
+        }
+       .date-seance {
+            width: 20px;
+        }
+       .creneau-seance {
+            width: 20px;
+        }
+       .titre-seance {
+            width: 20px;
+        }
+       .affiche-seance {
+            width: 20px;
+        }
+       .action-seance {
+            width: 20px;
+        }
+
+
+
     /* FOOTER & HEADER */
         .logo-responsive {
         width: 30px;
