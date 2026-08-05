@@ -1,122 +1,185 @@
-{% extends 'base.html'%} {% block content%}
-
-<div class="container">
-    <h1 class="display-3 fw-bold mb-3 text-secondary">Liste des seances</h1>
-    <br />
-    <p>
-        Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor eu
-        interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
-        adipiscing elit. Ad elit dolor eu interdum etiam maecenas quam.
-        <br />
-    </p>
-    <a href="{% url 'create_seance' %}" style="text-decoration: none">
-        <i class="fa-solid fa-circle-arrow-right text-info"></i>
-        <span class="text-info"> Créer seance </span>
-    </a>
-    <br /><br />
-    <div>
-        <div class="card shadow-lg p-2 mb-5">
-            <div class="card-body p-5">
-                <table class="table">
+{% extends 'base.html' %} {% block content %}
+<div class="container py-4">
+    <!-- Titre -->
+    <div class="mb-4">
+        <h1 class="display-3 fw-bold text-secondary">Liste des seances</h1>
+        <p class="text-muted">
+            Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor
+            eu interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
+            adipiscing elit.
+        </p>
+        <a href="{% url 'create_seance' %}" class="text-decoration-none">
+            <i class="fa-solid fa-circle-arrow-right text-info"></i>
+            <span class="text-info">Créer séance</span>
+        </a>
+    </div>
+    <!-- Card -->
+    <div class="card shadow-lg border-0 mb-5">
+        <div class="card-body p-2 p-md-4 p-lg-5">
+            <!-- Tableau responsive -->
+            <div class="table-responsive">
+                <table
+                    class="table table-hover table-uniform align-middle mb-0"
+                >
                     <thead>
                         <tr class="text-center text-secondary">
-                            <th scope="col">id</th>
-                            <th scope="col">Salle</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Creneau</th>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Programme</th>
-                            <th scope="col">Place dispo</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Action</th>
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                ID
+                            </th>
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                Salle
+                            </th>
+                            <th scope="col" class="date-seance">Date</th>
+                            <th scope="col" class="creneau-seance">Créneau</th>
+                            <th scope="col" class="titre-seance">Titre</th>
+                            <th
+                                scope="col"
+                                class="affiche-seance hide-element-mobile hide-element-tablette"
+                            >
+                                Affiche
+                            </th>
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                Programme
+                            </th>
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                Place_dispo
+                            </th>
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                            >
+                                Prix
+                            </th>
+
+                            <th scope="col" class="action-seance">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for seance in seances %}
                         <tr>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">{{seance.id}}</p>
-                                </small>
+                            <!-- ID -->
+                            <td
+                                class="text-center hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ seance.id }}
+                                </span>
                             </td>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">{{seance.salle}}</p>
-                                </small>
+                            <!-- Salle -->
+                            <td
+                                class="text-center hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ seance.salle }}
+                                </span>
                             </td>
+                            <!-- Date  -->
                             <td class="text-center">
-                                <small>
-                                    <p class="text-muted">
-                                        {{seance.date|date:"d/m/Y"}}
-                                    </p>
-                                </small>
+                                <span class="text-muted">
+                                    {{ seance.date| date:"d/m/Y" }}
+                                </span>
                             </td>
+                            <!-- Creneau -->
                             <td class="text-center">
-                                <small>
-                                    <p class="text-muted">{{seance.horaire}}</p>
-                                </small>
+                                <span class="text-muted">
+                                    {{ seance.horaire }}
+                                </span>
                             </td>
-                            {% if seance.film %}
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">{{seance.film}}</p>
-                                </small>
-                            </td>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">Film</p>
-                                </small>
-                            </td>
-                            {% else %}
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">
-                                        {{seance.evenement}}
-                                    </p>
-                                </small>
-                            </td>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">Evenement</p>
-                                </small>
-                            </td>
-                            {% endif %}
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">
-                                        {{seance.place_dispo}}
-                                    </p>
-                                </small>
-                            </td>
-                            <td class="text-center">
-                                <small>
-                                    <p class="text-muted">{{seance.prix}}</p>
-                                </small>
+                            <!-- Titre -->
+                            <td class="text-center film-title">
+                                <span class="text-muted titre-film">
+                                    {{ seance.film }}
+                                </span>
                             </td>
 
-                            <td class="text-center">
-                                <a
-                                    href="{% url 'update_seance' seance.id %}"
-                                    style="text-decoration: none"
+                            <!-- Affiche -->
+                            <td
+                                class="text-center affiche-film hide-element-mobile hide-element-tablette"
+                            >
+                                {% if seance.film.affiche %}
+                                <img
+                                    src="{{ seance.film.affiche.url }}"
+                                    alt="{{ seance.affiche }}"
+                                    class="film-poster rounded shadow-sm"
+                                />
+                                {% else %}
+                                <img
+                                    src="{{ seance.evenement.affiche.url }}"
+                                    alt="{{ seance.affiche }}"
+                                    class="film-poster rounded shadow-sm"
+                                />
+                                {% endif %}
+                            </td>
+                            <!-- Programme -->
+                            <td
+                                class="text-center description-column hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ seance.programme }}
+                                </span>
+                            </td>
+                            <!-- Place dispo -->
+                            <td
+                                class="text-center description-column hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ seance.place_dispo }}
+                                </span>
+                            </td>
+                            <!-- Prix -->
+                            <td
+                                class="text-center description-column hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ seance.prix }}
+                                </span>
+                            </td>
+
+                            <!-- Actions -->
+                            <td class="text-center action-film">
+                                <div
+                                    class="d-flex flex-wrap justify-content-center gap-1"
                                 >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-primary rounded-4 text-petit"
+                                    <a
+                                        href="{% url 'update_seance' seance.id %}"
                                     >
-                                        Modifier
-                                    </button>
-                                </a>
-                                <a
-                                    href="{% url 'delete_seance' seance.id %}"
-                                    style="text-decoration: none"
-                                >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-danger rounded-4 text-petit"
+                                        <i
+                                            class="fa-solid fa-pen-to-square fa-xs"
+                                        ></i>
+                                    </a>
+                                    <a
+                                        href="{% url 'delete_seance' seance.id %}"
                                     >
-                                        Effacer
-                                    </button>
-                                </a>
+                                        <i
+                                            class="fa-solid fa-trash fa-xs text-danger"
+                                        ></i>
+                                    </a>
+                                    <a
+                                        href="{% url 'detail_seance' seance.id %}"
+                                    >
+                                        <i
+                                            class="fa-solid fa-eye fa-xs text-secondary"
+                                        ></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                Aucun film disponible.
                             </td>
                         </tr>
                         {% endfor %}
@@ -126,4 +189,4 @@
         </div>
     </div>
 </div>
-{%endblock content%}
+{% endblock content %}

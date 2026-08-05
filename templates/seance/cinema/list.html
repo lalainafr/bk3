@@ -54,27 +54,15 @@
                             </td>
 
                             <td class="text-center">
-                                <a
-                                    href="{% url 'update_cinema' cinema.id %}"
-                                    style="text-decoration: none"
-                                >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-primary rounded-4 text-petit"
-                                    >
-                                        Modifier
-                                    </button>
+                                <a href="{% url 'update_cinema' cinema.id %}">
+                                    <i
+                                        class="fa-solid fa-pen-to-square fa-xs"
+                                    ></i>
                                 </a>
-                                <a
-                                    href="{% url 'delete_cinema' cinema.id %}"
-                                    style="text-decoration: none"
-                                >
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-outline-danger rounded-4 text-petit"
-                                    >
-                                        Effacer
-                                    </button>
+                                <a href="{% url 'delete_cinema' cinema.id %}">
+                                    <i
+                                        class="fa-solid fa-trash fa-xs text-danger"
+                                    ></i>
                                 </a>
                             </td>
                         </tr>

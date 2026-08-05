@@ -1,0 +1,178 @@
+{% extends 'base.html'%} {% block content%}
+
+<div class="container">
+    <h1 class="display-3 fw-bold mb-3 text-secondary">Liste des seances</h1>
+    <br />
+    <p>
+        Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor eu
+        interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
+        adipiscing elit. Ad elit dolor eu interdum etiam maecenas quam.
+        <br />
+    </p>
+    <a href="{% url 'create_seance' %}" style="text-decoration: none">
+        <i class="fa-solid fa-circle-arrow-right text-info"></i>
+        <span class="text-info"> Créer seance </span>
+    </a>
+    <br /><br />
+    <div>
+        <div class="card shadow-lg p-2 mb-5">
+            <div class="card-body p-5" id="card-seance-list">
+                <table
+                    class="table"
+                    id="table-senace-list"
+                    style="background-color: aqua"
+                >
+                    <thead>
+                        <tr class="text-center text-secondary">
+                            <th scope="col" class="hide-element-mobile">id</th>
+                            <th scope="col" class="hide-element-mobile">
+                                Salle
+                            </th>
+                            <th scope="col" class="date-seance">Date</th>
+                            <th scope="col" class="creaneu-seance">Creneau</th>
+                            <th scope="col" class="titre-seance">Titre</th>
+                            <th
+                                scope="col"
+                                class="affiche-seance hide-element-mobile"
+                            >
+                                Affiche
+                            </th>
+                            <th scope="col" class="hide-element-mobile">
+                                Programme
+                            </th>
+                            <th scope="col" class="hide-element-mobile">
+                                Place dispo
+                            </th>
+                            <th scope="col" class="hide-element-mobile">
+                                Prix
+                            </th>
+                            <th scope="col" class="action-seance">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for seance in seances %}
+                        <tr>
+                            <td class="text-center">
+                                <small>
+                                    <p class="text-muted hide-element-mobile">
+                                        {{seance.id}}
+                                    </p>
+                                </small>
+                            </td>
+                            <td class="text-center">
+                                <small>
+                                    <p class="text-muted hide-element-mobile">
+                                        {{seance.salle}}
+                                    </p>
+                                </small>
+                            </td>
+                            <td class="text-center date-seance">
+                                <small>
+                                    <p class="text-muted">
+                                        {{seance.date|date:"d/m/Y"}}
+                                    </p>
+                                </small>
+                            </td>
+                            <td class="text-center creaneu-seance">
+                                <small>
+                                    <p class="text-muted">{{seance.horaire}}</p>
+                                </small>
+                            </td>
+
+                            {% if seance.film %}
+                            <td class="text-center">
+                                <small>
+                                    <p class="text-muted titre-seance">
+                                        {{seance.film}}
+                                    </p>
+                                </small>
+                            </td>
+                            <td class="text-center hide-element-mobile">
+                                <small>
+                                    <img
+                                        src="{{ seance.film.affiche.url}}"
+                                        alt="{{ film.affiche }}"
+                                        class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark film-poster"
+                                    />
+                                </small>
+                            </td>
+                            <td class="text-center hide-element-mobile">
+                                <small>
+                                    <p class="text-muted">Film</p>
+                                </small>
+                            </td>
+                            {% else %}
+                            <td class="text-center titre-seance">
+                                <small>
+                                    <p class="text-muted">
+                                        {{seance.evenement}}
+                                    </p>
+                                </small>
+                            </td>
+                            <td class="text-center hide-element-mobile">
+                                <small>
+                                    <img
+                                        src="{{ seance.evenement.affiche.url}}"
+                                        alt="{{ film.affiche }}"
+                                        class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark film-poster"
+                                    />
+                                </small>
+                            </td>
+                            <td class="text-center hide-element-mobile">
+                                <small>
+                                    <p class="text-muted">Evenement</p>
+                                </small>
+                            </td>
+                            {% endif %}
+                            <td class="text-center hide-element-mobile">
+                                <small>
+                                    <p class="text-muted">
+                                        {{seance.place_dispo}}
+                                    </p>
+                                </small>
+                            </td>
+                            <td class="text-center">
+                                <small>
+                                    <p class="text-muted hide-element-mobile">
+                                        {{seance.prix}}
+                                    </p>
+                                </small>
+                            </td>
+
+                            <!-- Actions -->
+                            <td class="text-center action-film">
+                                <div
+                                    class="d-flex flex-wrap justify-content-center gap-1"
+                                >
+                                    <a
+                                        href="{% url 'update_seance' seance.id %}"
+                                    >
+                                        <i
+                                            class="fa-solid fa-pen-to-square fa-xs"
+                                        ></i>
+                                    </a>
+                                    <a
+                                        href="{% url 'delete_seance' seance.id %}"
+                                    >
+                                        <i
+                                            class="fa-solid fa-trash fa-xs text-danger"
+                                        ></i>
+                                    </a>
+                                    <a
+                                        href="{% url 'detail_seance' seance.id %}"
+                                    >
+                                        <i
+                                            class="fa-solid fa-eye fa-xs text-secondary"
+                                        ></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

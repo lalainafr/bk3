@@ -1,16 +1,22 @@
-        </div>
-    </div>
-</section>
-
-<footer class="bg-light py-5">
+{% load static%}
+<footer class="bg-light py-5 mt-3">
     <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted">
-             O' C I N E M A <br>
-             <p class="opacity-50">
-            Proin pulvinar tortor sed commodo luctus. Vestibulum molestie, lorem in tincidunt laoreet
-             </p>
-            <hr>
-            Copyright &copy; 2026 
+        <div class="text-center text-muted">
+            <div class="d-flex justify-content-center">
+                <img
+                    src=" {% static 'img/image.png' %}"
+                    alt="image footer"
+                    class="logo-responsive"
+                />
+            </div>
+            <br />
+            <p class="opacity-50">
+                Proin pulvinar tortor sed commodo luctus. Vestibulum molestie,
+                lorem in tincidunt laoreet. tur adipisicing elit. Suscipit
+                illum, voluptatem doloremque hic nisi ipsum eum, fuga possimus
+            </p>
+            <hr />
+            Copyright &copy; 2026
         </div>
     </div>
 </footer>

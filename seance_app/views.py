@@ -217,6 +217,13 @@ def create_evenement(request):
         context = {"form": form}
         return render(request, "seance/evenement/create.html", context)
 
+# Detail evenement
+def detail_evenement(request, pk):
+    evenement = Evenement.objects.get(pk=pk)
+    context = {"evenement": evenement}
+    return render(request, "seance/evenement/details.html", context)
+
+
 
 # Edit evenement
 def update_evenement(request, pk):
@@ -302,6 +309,13 @@ def create_seance(request):
         seances = Seance.objects.all()
         context = {"form": form, "seances": seances}
         return render(request, "seance/seance/create.html", context)
+
+# Detail seance
+def detail_seance(request, pk):
+    seance = Seance.objects.get(pk=pk)
+    context = {"seance": seance}
+    return render(request, "seance/seance/details.html", context)
+
 
 
 # Edit seance

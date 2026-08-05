@@ -66,18 +66,17 @@
                 >
                     {{message}}
                 </div>
-                {% endfor %} {% else %}
-                <div id="message-content-ajax"></div>
-
-                {% endif %}
-                <div class="container-fluid">
-                    <div class="p-5">
+                {% endfor %} {% endif %}
+                <div class="container">
+                    <div class="px-5 py-2">
                         {%block heading%} {%endblock heading%}
                     </div>
                     {%block content%} {%endblock content%}
                 </div>
             </div>
-            {% include 'footer.html' %}
+            <div class="container-fluid">
+                <div class="py-3">{% include 'footer.html' %}</div>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>

@@ -5,7 +5,7 @@
             <div class="col-lg-7">
                 <div class="px-5">
                     <h3 class="display-4 fw-bold lh-1 mb-3 text-secondary">
-                        {{ film.titre}}
+                        {{ seance.film.titre}}
                     </h3>
 
                     <br />
@@ -13,7 +13,7 @@
                     <td class="text-center">
                         <small>
                             <img
-                                src="/media/{{ film.affiche }}"
+                                src="/media/{{ seance.film.affiche }}"
                                 alt="{{ film.affiche }}"
                                 style="width: 40%"
                             />
@@ -21,30 +21,34 @@
                     </td>
                     <br />
                     <br />
-                    <p>{{film.description }}</p>
+                    <p>{{seance.film.description }}</p>
                 </div>
             </div>
             <div class="col-lg-4 border shadow-lg p-4 mb-5 bg-white rounded">
                 <div class="pt-3">
-                    <small> <b>Id</b>: {{film.id}} </small>
-                    <br />
-                    <br />
-                    <small> <b>Réalisateur</b>: {{film.realisateur}} </small>
-                    <br />
-                    <br />
-                    <small> <b>Durée</b>: {{film.duree}} h </small>
-                    <br />
-                    <br />
-                    <small> <b>Genre</b>: {{film.genre}} </small>
-                    <br />
-                    <br />
-                    <small> <b>Date de sortie</b>: {{film.date_sortie}} </small>
-                    <br />
-                    <br />
+                    <small>
+                        <b>Salle</b>:<br />
+                        {{seance.salle}}
+                    </small>
+                    <br /><br />
+                    <small>
+                        <b>Date</b>:<br />
+                        {{seance.date}}</small
+                    >
+                    <br /><br />
+                    <small> <b>Créneau</b>: <br />{{seance.horaire}}</small>
+                    <br /><br />
+                    <small>
+                        <b>Date</b>:<br />
+                        {{seance.place_dispo}}
+                    </small>
+                    <br /><br />
+                    <small>
+                        <b>Prix d'entrée</b>:<br />
+                        {{seance.prix}} €
+                    </small>
+                    <br /><br />
                 </div>
-
-                <br />
-                <br />
 
                 <br />
 

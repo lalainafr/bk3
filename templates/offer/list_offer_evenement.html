@@ -27,11 +27,10 @@
                     <img
                         src="{{ evenement.affiche.url}}"
                         alt="{{ evenement.affiche }}"
-                        style="width: 80%"
-                        class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark"
+                        class="rounded-3 border rounded-4 bg-white shadow shadow-lg bg-dark affiche-responsive"
                     />
                 </div>
-                <div class="col-md-12 col-lg-3">
+                <div class="col-md-12 col-lg-5">
                     <p>
                         <b>Description:</b><br />
                         <span class="text-muted">
@@ -45,7 +44,7 @@
                     </p>
                 </div>
 
-                <div class="col-md-12 col-lg-3">
+                <div class="col-md-12 col-lg-2">
                     <p>
                         <b>Genre:</b><br />
                         <span class="text-muted"> {{evenement.genre}}</span
@@ -53,7 +52,7 @@
                     </p>
                 </div>
                 <div
-                    class="col-md-12 col-lg-3 border bg-white shadow bg-dark rounded-2 py-3"
+                    class="col-md-12 col-lg-2 border bg-white shadow bg-dark rounded-2 py-3"
                 >
                     <h6><b>Date disponibles:</b></h6>
                     {% for seance in seances %}
