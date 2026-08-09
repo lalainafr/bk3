@@ -10,9 +10,9 @@ def index(request):
 def test_mail(request):
     
     send_mail(
-                'titre', # titre
-                "message", # message
-                'settings.EMAIL_HOST_USER', # expediteur
+                'Dernier titre', # titre
+                "Dernier message", # message
+                settings.EMAIL_HOST_USER, # expediteur
                 ['r.lalainafr2@gmail.com'], # recipient
                 fail_silently=False
                 )
