@@ -150,9 +150,14 @@ AUTH_USER_MODEL = "account_app.User"
 
 # mail configuration
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "in-v3.mailjet.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.getenv("MAILJET_API_KEY")
+EMAIL_HOST_PASSWORD = os.getenv("MAILJET_SECRET_KEY")
+
 EMAIL_USE_TLS = True
 
+DEFAULT_FROM_EMAIL= os.getenv("DEFAULT_FROM_EMAIL")
