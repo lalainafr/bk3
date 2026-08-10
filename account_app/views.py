@@ -60,9 +60,10 @@ def register_user(request):
             recipient_list = [user.email]
 
             send_mail(email_subject, message, email_from, recipient_list)
-            return redirect("register_user")
+            messages.success(request, "Un message vous est envoyé sur votre adress email afin de valider votre compte")
+            return redirect("login")
         else:
-            print("ERREURS DU FORMULAIRE :", form.errors)
+            # print("ERREURS DU FORMULAIRE :", form.errors)
             messages.warning(request, "Something went wrong")
             return redirect("register_user")
     else:
