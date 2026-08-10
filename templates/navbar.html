@@ -31,14 +31,22 @@
                         >Evenement</a
                     >
                 </li>
-                <li class="nav-item"></li>
+                <li class="nav-item">{% if user.is_authenticated %}</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                 </li>
+                {% endif %} {% if user.is_authenticated %}
                 <li class="nav-item d-flex align-items-center">
                     <i class="fa-solid fa-circle-user"></i> &nbsp;
-                    <span class="text-petit text-muted"> Username </span>
+                    <span class="text-petit text-muted">
+                        {{user.first_name}}
+                    </span>
                 </li>
+                {% if user.is_superuser %}
                 <li class="nav-item dropdown">
                     <a
                         class="nav-link dropdown-toggle"
@@ -73,6 +81,8 @@
                         >
                     </div>
                 </li>
+
+                {% endif %} {% endif %}
             </ul>
         </div>
     </div>
