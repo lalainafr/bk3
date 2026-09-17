@@ -1,6 +1,6 @@
-from django.test import TestCase
-from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.test import TestCase, Client
+from django.urls import reverse
 
 User = get_user_model()
 
@@ -90,3 +90,31 @@ class TestLogout(TestCase):
 
         response = self.client.post(reverse("logout"), follow=True)
         self.assertContains(response, "You have been logged out", status_code=200)
+
+class TestTemplates(TestCase):
+    def setUp(self):
+            self.client = Client()
+
+    def test_login_uses_correct_template(self):
+        response = self.client.get(reverse("login"))
+        self.assertTemplateUsed(response, "account/login.html")
+        
+    def test_register_uses_correct_template(self):
+        response = self.client.get(reverse("register_user"))
+        self.assertTemplateUsed(response, "account/register_user.html")
+        
+    def test_login_contains_welcome_message_and_have_correct_status_code(self):
+        response = self.client.get(reverse("login"))
+        self.assertContains(
+            response,
+            "Authentification",
+            status_code=200,
+            )
+        
+    def test_register_contains_welcome_message_and_have_correct_status_code(self):
+        response = self.client.get(reverse("register_user"))
+        self.assertContains(
+            response,
+            "Registration",
+            status_code=200,
+            )

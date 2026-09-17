@@ -1,6 +1,6 @@
 from django import forms
-from .models import Cinema, Salle, Film, Evenement, Seance
 
+from .models import Cinema, Evenement, Film, Salle, Seance
 
 # Cinema
 

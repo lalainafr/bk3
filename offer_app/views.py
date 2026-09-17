@@ -1,36 +1,43 @@
-from django.shortcuts import render, redirect
-from seance_app.views import Seance
 from collections import defaultdict
 
+from django.shortcuts import render
+
+from seance_app.views import Seance
 
 
 def list_offer_film(request):
-    seances = Seance.objects.select_related("film").order_by("film","date","horaire")
-    
+    seances = Seance.objects.select_related("film").order_by("film", "date", "horaire")
+
     # On créer une liste
     films = defaultdict(list)
     
+    prix = None
+
     # On rajoute les films dans les  séances dans la liste
     for seance in seances:
-        if seance.programme == 'Film':
+        if seance.programme == "Film":
             films[seance.film].append(seance)
             prix = seance.prix
-        
-    context = {'films': films.items(), 'prix': prix}
+
+    context = {"films": films.items(), "prix": prix}
     return render(request, "offer/list_offer_film.html", context)
 
+
 def list_offer_evenement(request):
-    seances = Seance.objects.select_related("evenement").order_by("evenement","date","horaire")
-    
+    seances = Seance.objects.select_related("evenement").order_by(
+        "evenement", "date", "horaire"
+    )
+
     # On créer une liste
     evenements = defaultdict(list)
+
+    prix = None
     
     # On rajoute les films dans les  séances dans la liste
     for seance in seances:
-        if seance.programme == 'Evenement':
+        if seance.programme == "Evenement":
             evenements[seance.evenement].append(seance)
             prix = seance.prix
-            
-    context = {'evenements': evenements.items(), 'prix': prix}
-    return render(request, "offer/list_offer_evenement.html", context)
 
+    context = {"evenements": evenements.items(), "prix": prix}
+    return render(request, "offer/list_offer_evenement.html", context)

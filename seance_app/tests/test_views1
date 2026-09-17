@@ -1,0 +1,56 @@
+from django.test import TestCase
+from django.urls import reverse
+
+from seance_app.models import Cinema
+
+
+class CreateCinemaViewTest(TestCase):
+
+    def test_create_cinema_get(self):
+        url = reverse("create_cinema")
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "seance/cinema/create.html")
+        self.assertIn("form", response.context)
+
+    def test_create_cinema_post_valid(self):
+        url = reverse("create_cinema")
+
+        data = {
+            "name": "UGC Les Halles",
+            # ajoute ici les autres champs de ton formulaire
+        }
+
+        response = self.client.post(url, data)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("list_cinema"))
+
+        self.assertTrue(
+            Cinema.objects.filter(name="UGC Les Halles").exists()
+        )
+
+        messages = list(response.wsgi_request._messages)
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), "Le cinema a été créé")
+
+    def test_create_cinema_post_invalid(self):
+        url = reverse("create_cinema")
+
+        data = {
+            # données invalides
+        }
+
+        response = self.client.post(url, data)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("list_cinema"))
+
+        messages = list(response.wsgi_request._messages)
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            str(messages[0]),
+            "Echec lors de la création du cinema"
+        )

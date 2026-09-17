@@ -1,18 +1,11 @@
-from django.shortcuts import render, redirect
-from .form import (
-    CreateCinemaForm,
-    UpdateCinemaForm,
-    CreateSalleForm,
-    UpdateSalleForm,
-    CreateFilmForm,
-    UpdateFilmForm,
-    CreateEvenementForm,
-    UpdateSeanceForm,
-    CreateSeanceForm,
-    UpdateEvenementForm,
-)
 from django.contrib import messages
-from .models import Cinema, Salle, Film, Evenement, Seance
+from django.shortcuts import redirect, render
+
+from .form import (CreateCinemaForm, CreateEvenementForm, CreateFilmForm,
+                   CreateSalleForm, CreateSeanceForm, UpdateCinemaForm,
+                   UpdateEvenementForm, UpdateFilmForm, UpdateSalleForm,
+                   UpdateSeanceForm)
+from .models import Cinema, Evenement, Film, Salle, Seance
 
 # ---------- CINEMA ----------
 
@@ -262,23 +255,25 @@ def create_seance(request):
     if request.method == "POST":
         form = CreateSeanceForm(request.POST)
         if form.is_valid():
-            
-             # disponibilité salle selon creneau et date choisis     
-            salle = request.POST.get('salle')
-            date = request.POST.get('date')
-            horaire = request.POST.get('horaire')
-            
+
+            # disponibilité salle selon creneau et date choisis
+            salle = request.POST.get("salle")
+            date = request.POST.get("date")
+            horaire = request.POST.get("horaire")
+
             indisponible = Seance.objects.filter(
-                salle = salle,
-                date__date = date,
-                horaire = horaire,
+                salle=salle,
+                date__date=date,
+                horaire=horaire,
             ).exists()
-            
+
             if indisponible:
-                messages.warning(request, "Cette salle est déjà réservée à cette date et créneau")
+                messages.warning(
+                    request, "Cette salle est déjà réservée à cette date et créneau"
+                )
                 return redirect("list_seance")
-            else: 
-            
+            else:
+
                 var = form.save(commit=False)
 
                 var.place_dispo = var.salle.capacite
@@ -288,9 +283,9 @@ def create_seance(request):
                 else:
                     var.programme = "Evenement"
                     var.prix = 9.99
-                
+
                 messages.success(request, "La seance a été créée")
-                
+
                 var.save()
 
                 return redirect("list_seance")
@@ -310,22 +305,24 @@ def update_seance(request, pk):
     if request.method == "POST":
         form = UpdateSeanceForm(request.POST, instance=seance)
         if form.is_valid():
-            
-            # disponibilité salle selon creneau et date choisis     
-            salle = request.POST.get('salle')
-            date = request.POST.get('date')
-            horaire = request.POST.get('horaire')
-            
+
+            # disponibilité salle selon creneau et date choisis
+            salle = request.POST.get("salle")
+            date = request.POST.get("date")
+            horaire = request.POST.get("horaire")
+
             indisponible = Seance.objects.filter(
-                salle = salle,
-                date__date = date,
-                horaire = horaire,
+                salle=salle,
+                date__date=date,
+                horaire=horaire,
             ).exists()
-            
+
             if indisponible:
-                messages.warning(request, "Cette salle est déjà réservée à cette date et créneau")
+                messages.warning(
+                    request, "Cette salle est déjà réservée à cette date et créneau"
+                )
                 return redirect("list_seance")
-            else: 
+            else:
                 var = form.save(commit=False)
                 var.place_dispo = var.salle.capacite
                 if var.film:
@@ -345,6 +342,7 @@ def update_seance(request, pk):
         context = {"form": form}
         return render(request, "seance/seance/update.html", context)
 
+
 # List seance
 def list_seance(request):
     seances = Seance.objects.all()
@@ -356,5 +354,5 @@ def list_seance(request):
 def delete_seance(request, pk):
     seance = Seance.objects.get(pk=pk)
     seance.delete()
-    messages.success(request, "La salle a été supprimée")
+    messages.success(request, "La seance a été supprimée")
     return redirect("list_seance")

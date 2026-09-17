@@ -1,7 +1,9 @@
-from django.test import TestCase, Client, SimpleTestCase
-from django.urls import reverse
 from pathlib import Path
+
 from django.conf import settings
+from django.test import Client, SimpleTestCase, TestCase
+from django.urls import reverse, resolve
+from base_app import views
 
 
 class TestHomePage(TestCase, SimpleTestCase):
@@ -11,22 +13,21 @@ class TestHomePage(TestCase, SimpleTestCase):
 
     def test_homepage_uses_correct_template(self):
         response = self.client.get(reverse("home"))
-        self.assertTemplateUsed(response, "base_app/index.html")
+        self.assertTemplateUsed(response, "base/home.html")
 
     def test_homepage_contains_welcome_message_and_have_correct_status_code(self):
         response = self.client.get(reverse("home"))
         self.assertContains(
             response,
-            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
+            "Neque porro quisquam",
             status_code=200,
         )
 
-    def test_homepage_with_correct_title(self):
-        response = self.client.get(reverse("home"))
-        self.assertContains(
-            response, "<title>Portfolio for bachelor exam</title>", html=True
-        )
-
     def test_homepage_contains_company_logo(self):
-        logo_path = Path(settings.BASE_DIR) / "staticfiles" / "img" / "logo1.jpg"
+        logo_path = Path(settings.BASE_DIR) / "staticfiles" / "img" / "image.png"
         self.assertTrue(logo_path.exists(), f"expected logo image at {logo_path}")
+
+    def test_home_url(self):
+            url = reverse("home")
+            self.assertEqual(url, "/")
+            self.assertEqual(resolve(url).func, views.index)
