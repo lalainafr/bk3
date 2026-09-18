@@ -7,6 +7,8 @@ from collections import defaultdict
 def list_offer_film(request):
     seances = Seance.objects.select_related("film").order_by("film","date","horaire")
     
+    prix=0
+    
     # On créer une liste
     films = defaultdict(list)
     
@@ -21,6 +23,8 @@ def list_offer_film(request):
 
 def list_offer_evenement(request):
     seances = Seance.objects.select_related("evenement").order_by("evenement","date","horaire")
+    
+    prix=0
     
     # On créer une liste
     evenements = defaultdict(list)
