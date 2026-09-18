@@ -370,5 +370,5 @@ def list_seance(request):
 def delete_seance(request, pk):
     seance = Seance.objects.get(pk=pk)
     seance.delete()
-    messages.success(request, "La salle a été supprimée")
+    messages.success(request, "La seance a été supprimée")
     return redirect("list_seance")
