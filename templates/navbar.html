@@ -85,5 +85,17 @@
                 {% endif %} {% endif %}
             </ul>
         </div>
+        <form>
+            {% csrf_token %}
+            <a
+                href="{% url 'cart_summary' %}"
+                style="text-decoration: none"
+                class="text-secondary"
+                ><img
+                    src=" {% static 'img/cart.jpg' %}"
+                    alt="..."
+                    style="width: 30px; height: 30px; border-radius: 50%"
+            /></a>
+        </form>
     </div>
 </nav>
