@@ -49,6 +49,20 @@
                             <b>Prix d'entrée:</b><br />
                             <span class="text-muted"> {{prix}}</span>€<br />
                         </p>
+                        <br />
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button
+                                class="btn btn-outline-info btn-sm rounded-4"
+                            >
+                                <a
+                                    href="{% url 'film_list_seance' film.pk %}"
+                                    style="text-decoration: none"
+                                    class="text-secondary"
+                                    >Choisir</a
+                                >
+                            </button>
+                        </form>
                     </div>
                     <div class="col-md-12 col-lg-2">
                         <p>
@@ -88,6 +102,7 @@
                     </div>
                 </div>
             </div>
+
             {% endfor %}
         </div>
     </section>

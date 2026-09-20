@@ -372,3 +372,5 @@ def delete_seance(request, pk):
     seance.delete()
     messages.success(request, "La seance a été supprimée")
     return redirect("list_seance")
+
+

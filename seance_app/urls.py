@@ -36,4 +36,6 @@ urlpatterns = [
     path("detail-evenement/<str:pk>", views.detail_evenement, name="detail_evenement"),
     path("list-evenement/", views.list_evenement, name="list_evenement"),
     path("delete-evenement/<str:pk>", views.delete_evenement, name="delete_evenement"),
+    
+
 ]

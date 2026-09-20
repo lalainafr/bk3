@@ -25,6 +25,7 @@ urlpatterns = [
     path("", include("base_app.urls")),
     path("", include("account_app.urls")),
     path("offer/", include("offer_app.urls")),
+    # path("reservation/", include("reservation.urls")),
     path("dashboard/seance/", include("seance_app.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # static file implementation

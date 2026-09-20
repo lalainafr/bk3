@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from seance_app.views import Seance
+from seance_app.views import Seance, Film, Evenement
 from collections import defaultdict
 
 
@@ -19,7 +19,7 @@ def list_offer_film(request):
             prix = seance.prix
         
     context = {'films': films.items(), 'prix': prix}
-    return render(request, "offer/list_offer_film.html", context)
+    return render(request, "offer/offer_film.html", context)
 
 def list_offer_evenement(request):
     seances = Seance.objects.select_related("evenement").order_by("evenement","date","horaire")
@@ -36,5 +36,22 @@ def list_offer_evenement(request):
             prix = seance.prix
             
     context = {'evenements': evenements.items(), 'prix': prix}
-    return render(request, "offer/list_offer_evenement.html", context)
+    return render(request, "offer/offer_evenement.html", context)
+
+
+# List seance par film
+def film_list_seance(request, pk):
+    film = Film.objects.get(pk=pk)
+    seances = Seance.objects.filter(film = film)
+    context = {"seances": seances,
+               "film": film,}
+    return render(request, "offer/film_list_seance.html", context)
+
+# List seance par evenement
+def evenement_list_seance(request, pk):
+    evenement = Evenement.objects.get(pk=pk)
+    seances = Seance.objects.filter(evenement = evenement)
+    context = {"seances": seances,
+               "evenement": evenement,}
+    return render(request, "offer/evenement_list_seance.html", context)
 

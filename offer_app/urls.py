@@ -5,7 +5,7 @@ urlpatterns = [
     # Offer
     path("film/", views.list_offer_film, name="list_offer_film"),
     path("evenement/", views.list_offer_evenement, name="list_offer_evenement"),
-    # path("detail/<str:pk>/", views.detail_offer, name="detail_offer"),
-    # path("detail_dispo/", views.detail_dispo, name="detail_dispo"),
+    path("film-list-seance/<str:pk>/",views.film_list_seance, name="film_list_seance"),
+    path("evenement-list-seance/<str:pk>/",views.evenement_list_seance, name="evenement_list_seance"),
     
 ]

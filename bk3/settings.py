@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "account_app",
     "seance_app",
+    "reservation",
     "base_app",
     "widget_tweaks",
 ]
