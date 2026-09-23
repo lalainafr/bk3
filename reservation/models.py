@@ -19,7 +19,6 @@ class Order(models.Model):
         else:
            return f"{self.seance.programme} '{self.seance.evenement.titre}' {self.seance.date.strftime('%d/%m/%Y')} - {self.seance.horaire} ({self.quantity})"
 
-    # la methode sera utilisée comme si c'était une avariable ou attribut
     @property
     def subtotal(self):
         return self.seance.prix * self.quantity

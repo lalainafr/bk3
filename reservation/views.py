@@ -3,6 +3,7 @@ from seance_app.models import Seance
 from reservation.models import Cart, Order
 from django.urls import reverse
 from django.utils import timezone
+from django.http import JsonResponse
 
 def add_to_cart(request, pk):
     
@@ -58,13 +59,10 @@ def cart(request):
         }
     )
 
-def delete_cart(request):
-    # Récuperer le panier de l'utilisateur. S'il existe on supprimer les orders à l'intérieur et ensuite le panier
-    cart = request.user.cart
+# supprimer un order dans le panier
+def remove_from_cart(request, pk):
+    order = Order.objects.get(pk=pk)
+    order.delete()
+    return redirect('cart')
     
-    if cart:   
-        cart.orders.all().delete()
-        cart.delete()
-        
-    return redirect('home')
-
+    

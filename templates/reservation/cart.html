@@ -10,12 +10,10 @@
     <div
         class="p-2 p-md-4 my-3 my-md-5 border rounded-4 bg-white shadow-lg bg-light opacity-75 mx-auto"
     >
-        <a href="{% url 'delete_cart'%}">Supprimer le panier</a>
-
         <div class="card-body p-2 p-md-4">
             <!-- Responsive sur mobile -->
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
+                <table class="table table-hover align-middle" id="tbody">
                     <thead>
                         <tr class="text-center text-secondary">
                             <th scope="col">ID</th>
@@ -26,6 +24,7 @@
                             <th scope="col">Créneau</th>
                             <th scope="col">Prix</th>
                             <th scope="col">Sous Total</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
 
@@ -81,6 +80,20 @@
                             </td>
                             <td class="text-center">
                                 <small> {{ order.subtotal }} € </small>
+                            </td>
+                            <td class="text-center">
+                                <!-- bouton supprimer order du panier -->
+                                <small>
+                                    <a
+                                        href="{%  url 'remove_from_cart' order.id %}"
+                                        class="text-danger"
+                                        style="text-decoration: none"
+                                    >
+                                        <i
+                                            class="fa-solid fa-trash fa-xs text-danger"
+                                        ></i>
+                                    </a>
+                                </small>
                             </td>
                         </tr>
 

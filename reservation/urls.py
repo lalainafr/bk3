@@ -3,7 +3,11 @@ from . import views
 
 urlpatterns = [
     path('', views.cart, name="cart"),
-    path('delete/', views.delete_cart, name="delete_cart"),
+
     path('add-to-cart-seance<str:pk>', views.add_to_cart, name="add_to_cart"),
+
+    # Enlever un order du panier 
+    path('remove-from-cart/<str:pk>', views.remove_from_cart, name='remove_from_cart'),
+
 
 ]
