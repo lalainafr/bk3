@@ -8,12 +8,12 @@
         <hr class="divider divider-warning" />
 
         <img
-            src="{{ evenement.affiche.url}}"
-            alt="film affiche"
+            src="{{ film.affiche.url}}"
+            alt="{{ film.affiche }}"
             class="rounded-3 border rounded-4 bg-white shadow shadow-lg affiche-responsive"
         />
         <br /><br />
-        <p class="text-center">{{evenement.description}}</p>
+        <p class="text-center">{{film.description}}</p>
     </div>
     <div class="col-md-12 col-lg-6 text-center mx-auto">
         {% for seance in seances %}
@@ -32,7 +32,7 @@
                     {% csrf_token %}
                     <button class="btn btn-outline-info btn-sm rounded-4">
                         <a
-                            href="{% url 'evenement_list_seance' evenement.pk %}"
+                            href="{% url 'add_to_cart' seance.pk %}"
                             style="text-decoration: none"
                             class="text-secondary"
                             >Choisir</a

@@ -1,0 +1,117 @@
+{% extends 'base.html' %} {% load static %} {% load widget_tweaks %} <br />
+{% block heading %}
+<div class="jumbotron">
+    <h1 class="display-3 fw-bold lh-1 mb-3 text-secondary">Panier</h1>
+</div>
+{% endblock heading %}
+<br />
+{% block content %} {% if orders %}
+<section class="container-fluid px-2 px-md-4">
+    <div
+        class="p-2 p-md-4 my-3 my-md-5 border rounded-4 bg-white shadow-lg bg-light opacity-75 mx-auto"
+    >
+        <a href="{% url 'delete_cart'%}">Supprimer le panier</a>
+
+        <div class="card-body p-2 p-md-4">
+            <!-- Responsive sur mobile -->
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr class="text-center text-secondary">
+                            <th scope="col">ID</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Programme</th>
+                            <th scope="col">Affiche</th>
+                            <th scope="col">Seance</th>
+                            <th scope="col">Créneau</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Sous Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for order in orders %}
+
+                        <tr>
+                            <td class="text-center">
+                                <small>{{ order.id }}</small>
+                            </td>
+
+                            <td class="text-center">
+                                <small>{{ order.quantity }}</small>
+                            </td>
+
+                            <td class="text-center">
+                                <small> {{ order.seance.programme }} </small>
+                            </td>
+
+                            <td class="text-center">
+                                {% if order.seance.film.affiche %}
+
+                                <img
+                                    src="{{ order.seance.film.affiche.url }}"
+                                    alt="Affiche du film"
+                                    class="film-poster rounded shadow-sm"
+                                />
+
+                                {% elif order.seance.evenement.affiche %}
+
+                                <img
+                                    src="{{ order.seance.evenement.affiche.url }}"
+                                    alt="Affiche de l'événement"
+                                    class="film-poster rounded shadow-sm"
+                                />
+
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if order.seance.film %}
+                                {{order.seance.film.titre}} {% else %}
+                                {{order.seance.evenement.titre}} {% endif %}
+                            </td>
+
+                            <td class="text-center">
+                                <small>
+                                    {{ order.seance.date|date:"d/m/Y" }} -
+                                    {{order.seance.horaire }}
+                                </small>
+                            </td>
+                            <td class="text-center">
+                                <small> {{ order.seance.prix }} € </small>
+                            </td>
+                            <td class="text-center">
+                                <small> {{ order.subtotal }} € </small>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="7" class="text-center py-5">
+                                Votre panier est vide.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <p>
+                    Total:
+                    <strong>{{ cart.total|floatformat:2 }} €</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% else %}
+
+<div class="text-center py-5">
+    <h3>Panier vide</h3>
+    <p>Vous n'avez aucune commande dans votre panier.</p>
+
+    <a href="{% url 'list_offer_film' %}" class="btn btn-primary">
+        Retour aux séances
+    </a>
+</div>
+{% endif %} {% endblock content %}

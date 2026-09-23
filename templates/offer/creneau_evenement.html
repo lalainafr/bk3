@@ -8,12 +8,12 @@
         <hr class="divider divider-warning" />
 
         <img
-            src="{{ film.affiche.url}}"
-            alt="{{ film.affiche }}"
+            src="{{ evenement.affiche.url}}"
+            alt="film affiche"
             class="rounded-3 border rounded-4 bg-white shadow shadow-lg affiche-responsive"
         />
         <br /><br />
-        <p class="text-center">{{film.description}}</p>
+        <p class="text-center">{{evenement.description}}</p>
     </div>
     <div class="col-md-12 col-lg-6 text-center mx-auto">
         {% for seance in seances %}
@@ -27,12 +27,13 @@
                     Il reste {{seance.place_dispo}} places
                 </span>
             </div>
+            {% if user.is_authenticated %}
             <div class="text-end px-3 py-1">
                 <form action="" method="post">
                     {% csrf_token %}
                     <button class="btn btn-outline-info btn-sm rounded-4">
                         <a
-                            href="{% url 'film_list_seance' film.pk %}"
+                            href="{% url 'add_to_cart' seance.pk %}"
                             style="text-decoration: none"
                             class="text-secondary"
                             >Choisir</a
@@ -40,6 +41,7 @@
                     </button>
                 </form>
             </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

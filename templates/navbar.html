@@ -88,7 +88,7 @@
         <form>
             {% csrf_token %}
             <a
-                href="{% url 'cart_summary' %}"
+                href="{%url 'cart'%}"
                 style="text-decoration: none"
                 class="text-secondary"
                 ><img
@@ -96,6 +96,9 @@
                     alt="..."
                     style="width: 30px; height: 30px; border-radius: 50%"
             /></a>
+            <!-- Nombre de orders (séances) dans le panier -->
+            {% if user.cart.orders%} {{user.cart.orders.count}} {% else%} 0
+            {%endif%}
         </form>
     </div>
 </nav>

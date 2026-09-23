@@ -39,19 +39,19 @@ def list_offer_evenement(request):
     return render(request, "offer/offer_evenement.html", context)
 
 
-# List seance par film
-def film_list_seance(request, pk):
+# Choix créneau du film
+def creneau_film(request, pk):
     film = Film.objects.get(pk=pk)
     seances = Seance.objects.filter(film = film)
     context = {"seances": seances,
                "film": film,}
-    return render(request, "offer/film_list_seance.html", context)
+    return render(request, "offer/creneau_film.html", context)
 
-# List seance par evenement
-def evenement_list_seance(request, pk):
+# Choix creneau de l'evenement
+def creneau_evenement(request, pk):
     evenement = Evenement.objects.get(pk=pk)
     seances = Seance.objects.filter(evenement = evenement)
     context = {"seances": seances,
                "evenement": evenement,}
-    return render(request, "offer/evenement_list_seance.html", context)
+    return render(request, "offer/creneau_evenement.html", context)
 

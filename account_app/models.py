@@ -9,4 +9,4 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
 
     def __str__(self) -> str:
-        return (self.last_name) + " " + self.first_name
+        return (self.username) 
