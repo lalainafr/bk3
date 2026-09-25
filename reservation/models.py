@@ -11,7 +11,7 @@ class Order(models.Model):
     quantity = models.IntegerField(default=1)
     # savoir si la séance été commandée
     ordered = models.BooleanField(default=False) 
-    ordered_date = models.DateTimeField(blank=True, null=True)
+    subtotal = models.FloatField(default=0.00)
     
     def __str__(self):
         if self.seance.film:
@@ -19,9 +19,7 @@ class Order(models.Model):
         else:
            return f"{self.seance.programme} '{self.seance.evenement.titre}' {self.seance.date.strftime('%d/%m/%Y')} - {self.seance.horaire} ({self.quantity})"
 
-    @property
-    def subtotal(self):
-        return self.seance.prix * self.quantity
+   
     
 # Panier
 class Cart(models.Model):
@@ -29,14 +27,13 @@ class Cart(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
     # Il peut y avoir plusieurs séances commandées dans le panier
     orders = models.ManyToManyField(Order, blank=True)
-      
+    total = models.FloatField(default=0.00)
+    isPaid = models.BooleanField(default=False)
+           
     
     def __str__(self):
         return f"{self.user.username}"
     
-    @property
-    def total(self):
-        return sum(order.subtotal for order in self.orders.all())
     
    
     

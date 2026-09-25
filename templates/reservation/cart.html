@@ -79,20 +79,19 @@
                                 <small> {{ order.seance.prix }} € </small>
                             </td>
                             <td class="text-center">
-                                <small> {{ order.subtotal }} € </small>
+                                <small>
+                                    {{ order.subtotal|floatformat:2 }} €
+                                </small>
                             </td>
                             <td class="text-center">
                                 <!-- bouton supprimer order du panier -->
                                 <small>
-                                    <a
-                                        href="{%  url 'remove_from_cart' order.id %}"
-                                        class="text-danger"
-                                        style="text-decoration: none"
-                                    >
-                                        <i
-                                            class="fa-solid fa-trash fa-xs text-danger"
-                                        ></i>
-                                    </a>
+                                    <input
+                                        type="button"
+                                        value="Delete"
+                                        class="btn btn-outline-danger btn-del btn-sm"
+                                        data-sid="{{order.id}}"
+                                    />
                                 </small>
                             </td>
                         </tr>
@@ -110,7 +109,11 @@
                 </table>
                 <p>
                     Total:
-                    <strong>{{ cart.total|floatformat:2 }} €</strong>
+                    <strong>
+                        <span id="total">
+                            {{ cart.total|floatformat:2 }} €
+                        </span>
+                    </strong>
                 </p>
             </div>
         </div>

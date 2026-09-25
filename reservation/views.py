@@ -4,6 +4,8 @@ from reservation.models import Cart, Order
 from django.urls import reverse
 from django.utils import timezone
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Sum
 
 def add_to_cart(request, pk):
     
@@ -25,17 +27,21 @@ def add_to_cart(request, pk):
     # order: l'objet
     # created: bool pour savoir si l'element a été crée ou non
 
-    if created:
-    # cela veut dire qu'il n'existe pas encore dans le panier, donc il faudra le créer (avec l'element qu'on a récupérer: 'order')   
-        cart.orders.add(order)
-        order.ordered = True
-        order.ordered_date = timezone.now()
-        order.save()
-        cart.save()   
-            
-    else:
+    # On incremente la quantité si la seance existe
+    if not created:
         order.quantity += 1
         order.save()  
+
+    # cela veut dire qu'il n'existe pas encore dans le panier, donc il faudra le créer (avec l'element qu'on a récupérer: 'order')   
+    cart.orders.add(order)
+    order.subtotal = order.seance.prix * order.quantity
+    order.ordered = True
+    order.save()
+    
+    cart.total = sum(order.subtotal for order in cart.orders.all())
+    cart.save()   
+
+        
     if order.seance.film:
         return redirect(reverse("list_offer_film"))
     else:
@@ -60,9 +66,38 @@ def cart(request):
     )
 
 # supprimer un order dans le panier
-def remove_from_cart(request, pk):
-    order = Order.objects.get(pk=pk)
-    order.delete()
-    return redirect('cart')
+# def remove_from_cart(request, pk):
+#     order = Order.objects.get(pk=pk)
+#     order.delete()
+#     return redirect('cart')
     
-    
+
+# AJAX - supprimer un order dans le panier
+@csrf_exempt
+def delete_data(request):
+    # requete POST à partir de l'AJAX
+    if request.method == 'POST':
+        id = request.POST.get('order_id')
+
+        order = Order.objects.get(pk=id)
+
+        cart = Cart.objects.get(user=request.user)
+
+        order.delete()
+
+        # on actualise la valeur du TOTAL après la suppression d'un order
+        cart.total = sum(
+            order.subtotal
+            for order in cart.orders.all()
+        )
+
+
+        cart.save()
+
+        return JsonResponse({
+            'status': 1,
+            'total': cart.total,
+            'order_count': cart.orders.count()  
+        })
+
+    return JsonResponse({'status': 0})
