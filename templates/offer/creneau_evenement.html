@@ -40,8 +40,17 @@
                         >
                     </button>
                 </form>
+                {% else %}
+                <button class="btn btn-outline-info btn-sm rounded-4">
+                    <a
+                        href="{% url 'login' %}"
+                        style="text-decoration: none"
+                        class="text-secondary"
+                        >Se connecter</a
+                    >
+                </button>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
         {% endfor %}
     </div>

@@ -36,8 +36,27 @@
                                 <small>{{ order.id }}</small>
                             </td>
 
+                            <!-- On mets des id pour cibler  le '-', '+', et la 'quantité' de charder order avec le eventlistener -->
                             <td class="text-center">
-                                <small>{{ order.quantity }}</small>
+                                <!-- 'quantity-update-btn' pour cibler les 2 boutons '+' et '-'  -->
+
+                                <button
+                                    id="sub-{{order.id}}"
+                                    class="quantity-update-btn border bg-white shadow-lg bg-white opacity-75 text-danger"
+                                    style="border: none"
+                                >
+                                    -
+                                </button>
+                                <span id="value-{{order.id}}">
+                                    <small>{{ order.quantity }}</small>
+                                </span>
+                                <button
+                                    id="add-{{order.id}}"
+                                    class="quantity-update-btn border bg-white shadow-lg bg-white opacity-75 text-danger"
+                                    style="border: none"
+                                >
+                                    +
+                                </button>
                             </td>
 
                             <td class="text-center">
@@ -76,11 +95,22 @@
                                 </small>
                             </td>
                             <td class="text-center">
-                                <small> {{ order.seance.prix }} € </small>
+                                <small>
+                                    <span id="prix-{{order.id}}">
+                                        {{ order.seance.prix }}
+                                    </span>
+                                    €
+                                </small>
                             </td>
                             <td class="text-center">
                                 <small>
-                                    {{ order.subtotal|floatformat:2 }} €
+                                    <span
+                                        id="subtotal-{{order.id}}"
+                                        class="subtotal"
+                                    >
+                                        {{ order.subtotal|floatformat:2 }}
+                                    </span>
+                                    €
                                 </small>
                             </td>
                             <td class="text-center">
@@ -89,7 +119,7 @@
                                     <input
                                         type="button"
                                         value="Delete"
-                                        class="btn btn-outline-danger btn-del btn-sm"
+                                        class="btn btn-outline-danger btn-del btn-sm rounded-4"
                                         data-sid="{{order.id}}"
                                     />
                                 </small>
