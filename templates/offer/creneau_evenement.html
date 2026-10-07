@@ -1,0 +1,60 @@
+{%extends 'base.html'%} {%load static%} {%load widget_tweaks%}{%block content%}
+
+<div class="row mx-5 text-center w-75 mx-auto text-center">
+    <div class="col-md-12 col-lg-6">
+        <h1 class="display-3 fw-bold lh-1 text-center text-secondary">
+            Choix créneau
+        </h1>
+        <hr class="divider divider-warning" />
+
+        <img
+            src="{{ evenement.affiche.url}}"
+            alt="film affiche"
+            class="rounded-3 border rounded-4 bg-white shadow shadow-lg affiche-responsive"
+        />
+        <br /><br />
+        <p class="text-center">{{evenement.description}}</p>
+    </div>
+    <div class="col-md-12 col-lg-6 text-center mx-auto">
+        {% for seance in seances %}
+        <div
+            class="p-2 m-5 border rounded-4 bg-white shadow-lg bg-ligth opacity-75 w-50 mx-auto text-center"
+        >
+            <div class="text-start px-3 py-1">
+                {{seance.date|date:"d/m/Y"}} à {{seance.horaire}}
+                <br />
+                <span class="text-petit text-muted text-petit">
+                    Il reste {{seance.place_dispo}} places
+                </span>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="text-end px-3 py-1">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-info btn-sm rounded-4">
+                        <a
+                            href="{% url 'add_to_cart' seance.pk %}"
+                            style="text-decoration: none"
+                            class="text-secondary"
+                            >Choisir</a
+                        >
+                    </button>
+                </form>
+                {% else %}
+                <button class="btn btn-outline-info btn-sm rounded-4">
+                    <a
+                        href="{% url 'login' %}"
+                        style="text-decoration: none"
+                        class="text-secondary"
+                        >Se connecter</a
+                    >
+                </button>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{%endblock content%}
+<!-- Footer-->

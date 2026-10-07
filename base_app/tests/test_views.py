@@ -1,10 +1,11 @@
-
 from pathlib import Path
 
 from django.conf import settings
 from django.test import Client, SimpleTestCase, TestCase
-from django.urls import reverse, resolve
+from django.urls import resolve, reverse
+
 from base_app import views
+
 
 class TestHomePage(TestCase, SimpleTestCase):
 
@@ -28,7 +29,6 @@ class TestHomePage(TestCase, SimpleTestCase):
         self.assertTrue(logo_path.exists(), f"expected logo image at {logo_path}")
 
     def test_home_url(self):
-            url = reverse("home")
-            self.assertEqual(url, "/")
-            self.assertEqual(resolve(url).func, views.index)
-
+        url = reverse("home")
+        self.assertEqual(url, "/")
+        self.assertEqual(resolve(url).func, views.index)

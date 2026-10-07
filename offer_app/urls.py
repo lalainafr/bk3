@@ -1,11 +1,14 @@
 from django.urls import path
+
 from . import views
 
 urlpatterns = [
     # Offer
     path("film/", views.list_offer_film, name="list_offer_film"),
     path("evenement/", views.list_offer_evenement, name="list_offer_evenement"),
-    # path("detail/<str:pk>/", views.detail_offer, name="detail_offer"),
-    # path("detail_dispo/", views.detail_dispo, name="detail_dispo"),
-    
+    path("creneau-film/<str:pk>/", views.creneau_film, name="creneau_film"),
+    path(
+        "creaneu-evenement/<str:pk>/", views.creneau_evenement, name="creneau_evenement"
+    ),
+    path("creneau-film/<str:pk>/", views.creneau_film, name="creneau_film"),
 ]

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Cinema, Salle, Film, Seance, Evenement
+
+from .models import Cinema, Evenement, Film, Salle, Seance
 
 admin.site.register(Cinema)
 admin.site.register(Salle)

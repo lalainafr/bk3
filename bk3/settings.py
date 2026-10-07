@@ -10,13 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
-
-
-import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "account_app",
     "seance_app",
+    "reservation",
     "base_app",
     "widget_tweaks",
 ]
@@ -160,4 +160,4 @@ EMAIL_HOST_PASSWORD = os.getenv("MAILJET_SECRET_KEY")
 
 EMAIL_USE_TLS = True
 
-DEFAULT_FROM_EMAIL= os.getenv("DEFAULT_FROM_EMAIL")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")

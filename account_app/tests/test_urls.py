@@ -1,10 +1,9 @@
-
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 
 from account_app import views
 
-  
+
 class AccountUrlsTest(SimpleTestCase):
 
     def test_register_user_url(self):
