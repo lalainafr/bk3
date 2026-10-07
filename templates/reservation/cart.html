@@ -10,16 +10,22 @@
     <div
         class="p-2 p-md-4 my-3 my-md-5 border rounded-4 bg-white shadow-lg bg-light opacity-75 mx-auto"
     >
-        <div class="card-body p-2 p-md-4">
+        <div class="p-2 p-md-4">
             <!-- Responsive sur mobile -->
             <div class="table-responsive">
                 <table class="table table-hover align-middle" id="tbody">
                     <thead>
                         <tr class="text-center text-secondary">
-                            <th scope="col">ID</th>
+                            <th scope="col" class="hide-element-tablette">
+                                ID
+                            </th>
                             <th scope="col">Quantité</th>
-                            <th scope="col">Programme</th>
-                            <th scope="col">Affiche</th>
+                            <th scope="col" class="hide-element-tablette">
+                                Programme
+                            </th>
+                            <th scope="col" class="hide-element-tablette">
+                                Affiche
+                            </th>
                             <th scope="col">Seance</th>
                             <th scope="col">Créneau</th>
                             <th scope="col">Prix</th>
@@ -32,7 +38,7 @@
                         {% for order in orders %}
 
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center hide-element-tablette">
                                 <small>{{ order.id }}</small>
                             </td>
 
@@ -59,11 +65,11 @@
                                 </button>
                             </td>
 
-                            <td class="text-center">
+                            <td class="text-center hide-element-tablette">
                                 <small> {{ order.seance.programme }} </small>
                             </td>
 
-                            <td class="text-center">
+                            <td class="text-center hide-element-tablette">
                                 {% if order.seance.film.affiche %}
 
                                 <img

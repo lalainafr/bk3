@@ -6,22 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reservation', '0001_initial'),
+        ("reservation", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='order',
-            name='ordered_date',
+            model_name="order",
+            name="ordered_date",
         ),
         migrations.AddField(
-            model_name='cart',
-            name='isPaid',
+            model_name="cart",
+            name="isPaid",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='cart',
-            name='total',
+            model_name="cart",
+            name="total",
             field=models.FloatField(default=0.0),
         ),
     ]

@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reservation', '0002_remove_order_ordered_date_cart_ispaid_cart_total'),
+        ("reservation", "0002_remove_order_ordered_date_cart_ispaid_cart_total"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='subtotal',
+            model_name="order",
+            name="subtotal",
             field=models.FloatField(default=0.0),
         ),
     ]

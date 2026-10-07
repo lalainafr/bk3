@@ -22,7 +22,7 @@ $(".quantity-update-btn").on("click",function (event) {
             success: function( result ) {
                 // Mis à jour de la quantité coté front end
                 $(`#value-${id}`).html(result);
-                console.log(result)
+                    console.log('data:', result);
 
                 const quantity_order = $(`#value-${id}`).text();
                 const prix_order = $(`#prix-${id}`).text();
@@ -33,12 +33,16 @@ $(".quantity-update-btn").on("click",function (event) {
 
                 // console.log ('quantity:', quantity_order,'prix:', prix_order, 'subtotal:',subtotal_order);
 
-                let total = 0;
+                let total = 0
 
-                $(".subtotal").each(function() {
-                    const subtotal = Number($(this).text());
-                    total =+ subtotal;
-                });
+                const subtotals = document.querySelectorAll(".subtotal");
+
+                for (let i = 0; i < subtotals.length; i++) {
+                    const subtotal = Number(subtotals[i].textContent);
+
+                    total += subtotal;
+}
+                console.log('total final:' + total)
 
                 // Affichage  total après la MAJ de la quantity et subtotal du order coté front end
                 $(`#total`).html(total.toFixed(2));
