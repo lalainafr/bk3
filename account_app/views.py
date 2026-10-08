@@ -2,18 +2,21 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.core.mail import send_mail
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 # token - mail confirmation import
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from .form import RegisterCustomerForm
+from .form import ProfileForm, RegisterCustomerForm
+from .models import Profile
 from .token import generate_token
 
 User = get_user_model()
 
 
+# Activation de la création de compte
 def activate(request, uidb64, token):
     User = get_user_model()
     try:
@@ -102,3 +105,29 @@ def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out")
     return redirect("home")
+
+
+# profile (information nécessaire pour simuler un paiement)
+# end point qui servira pour simuler un paiement (vérification )
+def list_profile(request):
+    profiles = Profile.objects.all()
+    context = {"profiles": profiles}
+
+    profile_data = list(
+        Profile.objects.values(
+            "id",
+            "birthday",
+            "bankName",
+            "accountNb",
+            "accountBalance",
+            "user__username",
+            "user__email",
+            "user__first_name",
+            "user__last_name",
+        )
+    )
+
+    print(profile_data)
+
+    # retourner un end point en json
+    return JsonResponse({"profile_datas": profile_data})
