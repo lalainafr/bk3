@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from reservation.models import Cart, Order
 from seance_app.models import Seance
 
+from .form import PaymentForm
 
 def add_to_cart(request, pk):
 
@@ -159,3 +160,17 @@ def update(request):
         except ObjectDoesNotExist:
             raise Http404("not found")
     return HttpResponse("ok")
+
+
+# Paiement 
+def payment(request):
+   
+    cart = Cart.objects.get(user=request.user.id)
+    
+    form = PaymentForm(request.POST)
+
+    context = {
+        'form': form,
+        'cart': cart
+            }
+    return render(request, 'reservation/payment.html', context)

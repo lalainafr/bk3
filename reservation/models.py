@@ -3,6 +3,7 @@ from django.db import models
 from bk3.settings import AUTH_USER_MODEL
 from seance_app.models import Seance
 
+import uuid
 
 # La seance commandée
 class Order(models.Model):
@@ -33,3 +34,12 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.user.username}"
+
+# Paiement
+class Payment(models.Model):
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    birthDate = models.DateTimeField() 
+    cardNumber = models.CharField(max_length=50)
+    bankName = models.CharField(max_length=50)
+    paymentUid =  models.UUIDField(default=uuid.uuid4)
+
