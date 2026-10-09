@@ -7,7 +7,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from reservation.models import Cart, Order
+from reservation.models import Cart, Order, Payment
+from account_app.models import Profile
 from seance_app.models import Seance
 
 from .form import PaymentForm
@@ -174,3 +175,39 @@ def payment(request):
         'cart': cart
             }
     return render(request, 'reservation/payment.html', context)
+
+
+def valid_payment(request):
+    user = request.user
+    # cart = Cart.objects.get(user = user)
+    cart = get_object_or_404(Cart, user=request.user)
+    orders = Order.objects.filter(user=user)
+    profile = Profile.objects.get(user = user)
+    birthdate = profile.birthday
+    cardNumber = profile.accountNb
+    bankName = profile.bankName
+    cartAmount = cart.total
+    orderList = cart.orders.all()
+    
+    # On deduit du solde du compte de l'user le montant du panier 
+    profile.accountBalance -= cartAmount
+    profile.save()
+    
+    # On creer les infos du paiement en bdd
+    payment = Payment.objects.create(
+        user= user,
+        birthDate = birthdate,
+        cardNumber = cardNumber,
+        bankName = bankName,
+        orders = list(orderList),
+        cartAmount = cartAmount
+        )
+    payment.save()
+    
+    cart.isPaid = True
+    cart.save()
+    
+    context = {'orders': orders}    
+    
+    return render(request, 'reservation/valid_payment.html', context)
+

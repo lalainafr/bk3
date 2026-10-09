@@ -13,4 +13,6 @@ urlpatterns = [
     
     # paiement 
     path('payment', views.payment, name='payment'),
+    path('valid-payment', views.valid_payment, name='valid_payment'),
+
 ]

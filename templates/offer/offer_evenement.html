@@ -45,7 +45,9 @@
                     <br />
                     <form action="" method="post">
                         {% csrf_token %}
-                        <button class="btn btn-outline-info btn-sm rounded-4">
+                        <button
+                            class="btn btn-outline-info btn-sm rounded-4 w-25"
+                        >
                             <a
                                 href="{% url 'creneau_evenement' evenement.pk %}"
                                 style="text-decoration: none"
@@ -53,6 +55,7 @@
                                 >Choisir</a
                             >
                         </button>
+                        <br /><br />
                     </form>
                 </div>
 

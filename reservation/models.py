@@ -42,4 +42,9 @@ class Payment(models.Model):
     cardNumber = models.CharField(max_length=50)
     bankName = models.CharField(max_length=50)
     paymentUid =  models.UUIDField(default=uuid.uuid4)
+    cartAmount = models.FloatField(default=0.00)
+    orders = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.last_name + ' ' +  self.user.first_name
 
