@@ -120,6 +120,7 @@ def list_profile(request):
             "bankName",
             "accountNb",
             "accountBalance",
+            "user__id",
             "user__username",
             "user__email",
             "user__first_name",

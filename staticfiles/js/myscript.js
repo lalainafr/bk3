@@ -1,4 +1,85 @@
 
+
+// PAYMENT CHECK
+
+// ajax check card information
+$('#btn-check-card').click(function (e) {
+    e.preventDefault();
+    
+    // user id de la personne qui appuie sur le bouton 'COMMANDER'
+    let id = $(this).attr("data-id")
+
+    let profile = ''
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/list-profile",
+        success: function (response) {
+            // liste des profiles des user renvoyés en JSON avec le lien ci-dessus
+            profile_data = response.profile_datas
+
+            for (let index = 0; index < profile_data.length; index++) {
+                // On cherhe l'index du profil qui corresepond à l'user id
+                if (profile_data[index].user__id == id) {
+                    profile = profile_data[index];
+                }
+            }
+
+            console.log(profile)
+      
+            // Une fois trouvé, on récupére les informations du profil qui seront comparées avec les données entrées dans le formulaire par le user pour le paiement
+            let accountNb = profile['accountNb']
+            let bankName = profile['bankName']
+            let user_birthdate = profile['birthday'].substr(0, 10) // on prend les 10 premiere lettre '2005-02-05'
+
+            console.log(accountNb, bankName, user_birthdate)
+
+
+            // On récupere les données tapées par l'user à partir du formulaire
+            let check_birthdate =  $('#check-birthdate').val()
+            let check_accountNb =  $('#check-accountNb').val()
+            let check_bankName =  $('#check-bankName').val()
+
+            console.log('check_birthdate:' +  check_birthdate)
+            console.log('check_accountNb:' +  check_accountNb)
+            console.log('check_bankName:' +  check_bankName)
+
+            // LOGIQUE
+            // On compare les données (profile) de l'user à partir de la base de données avec les données saisies dans le formulaire
+            if (check_birthdate == user_birthdate) {
+                $('#status-birthdate').html('<i class="fa-regular text-success fa-circle-check"></i>')
+            } else {
+                $('#status-birthdate').html('<i class="fa-regular text-danger fa-circle-xmark"></i>')
+            }
+
+            if (check_accountNb == accountNb) {
+                $('#status-cardNumber').html('<i class="fa-regular text-success fa-circle-check"></i>')
+            } else {
+                $('#status-cardNumber').html('<i class="fa-regular text-danger fa-circle-xmark"></i>')
+            }
+
+            if (check_bankName == bankName) {
+                  $('#status-bankName').html('<i class="fa-regular text-success fa-circle-check"></i>')
+            } else {
+                $('#status-bankName').html('<i class="fa-regular text-danger fa-circle-xmark"></i>')
+            }
+
+            // all checked (les 3 éléments correspondent: date de naissance, carte bancaire et nome de la banque)
+            if (check_birthdate == user_birthdate && check_accountNb == accountNb &&  check_bankName == bankName) {
+                $('#all-checked').html('<i class="fa-regular text-success fa-circle-check fa-3x"></i>')
+                $('#valid-card').html('CARTE VALIDE')
+                $('#validation-info-card').html('INFORMATIONS BANCAIRES CORRECTES ET VALIDES')
+                // activer le bouton 'PAYER'
+                $('#btn-payer').removeClass('disabled');
+                // désactiver le bouton 'PAYER'
+                $('#btn-check-card').addClass('disabled');
+            }
+        }
+    });
+});
+
+
+
 // EDIT order quantity from cart
 
 $(".quantity-update-btn").on("click",function (event) {

@@ -51,7 +51,9 @@
     white-space: nowrap;
 }
 
-
+.hide-element{
+    display: none;
+}
 
 /* ---- R E S P O N S I V E ---- */
 
