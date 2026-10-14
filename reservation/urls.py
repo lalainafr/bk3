@@ -14,5 +14,9 @@ urlpatterns = [
     # paiement 
     path('payment', views.payment, name='payment'),
     path('valid-payment', views.valid_payment, name='valid_payment'),
+    
+    # ticket     
+    path('ticket-detail/<str:paymentUid>/',views.ticket_detail, name='ticket_detail'),
+    path('ticket-list/',views.ticket_list,name='ticket_list'),
 
 ]
