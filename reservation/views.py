@@ -1,25 +1,22 @@
+import os
+import time
+
+import qrcode
 from django import forms
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
-from django.http import (Http404, HttpResponse, HttpResponseBadRequest, JsonResponse)
+from django.http import (Http404, HttpResponse, HttpResponseBadRequest,
+                         JsonResponse)
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from reservation.models import Cart, Order, Payment, Ticket
 from account_app.models import Profile
+from reservation.models import Cart, Order, Payment, Ticket
 from seance_app.models import Seance
 
 from .form import PaymentForm
-
-
-from django.conf import settings
-import qrcode
-from qrcode import *
-import time
-import os
-
-
 
 
 def add_to_cart(request, pk):
@@ -172,18 +169,15 @@ def update(request):
     return HttpResponse("ok")
 
 
-# Paiement 
+# Paiement
 def payment(request):
-   
-    cart = Cart.objects.get(user=request.user.id)
-    
+
+    cart =get_object_or_404(Cart, user=request.user.id)
+
     form = PaymentForm(request.POST)
 
-    context = {
-        'form': form,
-        'cart': cart
-            }
-    return render(request, 'reservation/payment.html', context)
+    context = {"form": form, "cart": cart}
+    return render(request, "reservation/payment.html", context)
 
 
 def valid_payment(request):
@@ -191,46 +185,45 @@ def valid_payment(request):
     # cart = Cart.objects.get(user = user)
     cart = get_object_or_404(Cart, user=request.user)
     orders = Order.objects.filter(user=user)
-    profile = Profile.objects.get(user = user)
+    profile = Profile.objects.get(user=user)
     birthdate = profile.birthday
     cardNumber = profile.accountNb
     bankName = profile.bankName
     cartAmount = cart.total
     orderList = cart.orders.all()
-    
-    # On deduit du solde du compte de l'user le montant du panier 
+
+    # On deduit du solde du compte de l'user le montant du panier
     profile.accountBalance -= cartAmount
     profile.save()
-    
+
     # On creer les infos du paiement en bdd
     payment = Payment.objects.create(
-        user= user,
-        birthDate = birthdate,
-        cardNumber = cardNumber,
-        bankName = bankName,
-        orders = list(orderList),
-        cartAmount = cartAmount
-        )
+        user=user,
+        birthDate=birthdate,
+        cardNumber=cardNumber,
+        bankName=bankName,
+        orders=list(orderList),
+        cartAmount=cartAmount,
+    )
     payment.save()
-    
-    # Generer le qrcode du ticket 
-    userId= user.id
+
+    # Generer le qrcode du ticket
     # Le lien qui sera sur le qr_code
     data = f"http://127.0.0.1:8000/cart/ticket_detail/{payment.paymentUid}/"
 
     img = qrcode.make(data)
-    img_name = 'qr' + str(time.time()) + '.png'
+    img_name = "qr" + str(time.time()) + ".png"
     img_path = os.path.join(settings.MEDIA_ROOT, img_name)
     img.save(img_path)
 
     # On creer les infos du ticket associé au paiement en bdd
     ticket = Ticket.objects.create(
-        user = user,
-        payment = payment,
-        qrcode = str(img_name),
-        )
+        user=user,
+        payment=payment,
+        qrcode=str(img_name),
+    )
     ticket.save()
-    
+
     cart.isPaid = True
     cart.save()
 
@@ -238,21 +231,18 @@ def valid_payment(request):
     if cart.isPaid:
         cart.delete()
         orders.delete()
-    
-    context = {'orders': orders, 'img_name': img_name, 'ticket': ticket}    
-    
-    return render(request, 'reservation/valid_payment.html', context)
+
+    context = {"orders": orders, "img_name": img_name, "ticket": ticket}
+
+    return render(request, "reservation/valid_payment.html", context)
 
 
 # Détail du ticket
 def ticket_detail(request, paymentUid):
     ticket = get_object_or_404(
-        Ticket,
-        payment__paymentUid=paymentUid,
-        user=request.user
+        Ticket, payment__paymentUid=paymentUid, user=request.user
     )
-    
-    
+
     orders = (
         str(ticket.payment.orders)
         .replace(", <Order:", "\n<Order:")
@@ -263,15 +253,16 @@ def ticket_detail(request, paymentUid):
         .replace("Order:", "")
     )
 
-    return render(request, 'reservation/ticket_detail.html', {
-        'ticket': ticket, 'orders': orders
-    })
-    
-    
+    return render(
+        request, "reservation/ticket_detail.html", {"ticket": ticket, "orders": orders}
+    )
+
     # Liste des tickets de l'utilisateur
+
+
 def ticket_list(request):
-    tickets = Ticket.objects.filter(user= request.user)
-    
+    tickets = Ticket.objects.filter(user=request.user)
+
     for ticket in tickets:
         ticket.orders_formatted = (
             str(ticket.payment.orders)
@@ -283,8 +274,5 @@ def ticket_list(request):
             .replace("Order:", "")
         )
 
-
-    context = {
-        'tickets': tickets
-    }
-    return render(request, 'reservation/ticket_list.html', context)
+    context = {"tickets": tickets}
+    return render(request, "reservation/ticket_list.html", context)
