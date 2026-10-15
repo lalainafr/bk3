@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from .form import ProfileForm, RegisterCustomerForm
+from .form import RegisterCustomerForm
 from .models import Profile
 from .token import generate_token
 
@@ -110,9 +110,6 @@ def logout_user(request):
 # profile (information nécessaire pour simuler un paiement)
 # end point qui servira pour simuler un paiement (vérification )
 def list_profile(request):
-    profiles = Profile.objects.all()
-    context = {"profiles": profiles}
-
     profile_data = list(
         Profile.objects.values(
             "id",
@@ -120,6 +117,7 @@ def list_profile(request):
             "bankName",
             "accountNb",
             "accountBalance",
+            "user__id",
             "user__username",
             "user__email",
             "user__first_name",

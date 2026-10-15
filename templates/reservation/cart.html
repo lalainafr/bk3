@@ -48,7 +48,7 @@
 
                                 <button
                                     id="sub-{{order.id}}"
-                                    class="quantity-update-btn border bg-white shadow-lg bg-white opacity-75 text-danger"
+                                    class="quantity-update-btn border bg-white shadow-lg bg-white opacity-75 text-danger w-25 text-center"
                                     style="border: none"
                                 >
                                     -
@@ -58,7 +58,7 @@
                                 </span>
                                 <button
                                     id="add-{{order.id}}"
-                                    class="quantity-update-btn border bg-white shadow-lg bg-white opacity-75 text-danger"
+                                    class="quantity-update-btn border bg-white shadow-lg bg-white opacity-75 text-danger w-25 text-center"
                                     style="border: none"
                                 >
                                     +
@@ -153,6 +153,11 @@
                 </p>
             </div>
         </div>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'payment' %}" class="btn btn-primary w-50 rounded-4">
+            COMMANDER
+        </a>
     </div>
 </section>
 

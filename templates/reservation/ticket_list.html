@@ -1,0 +1,87 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container py-4">
+    <!-- Titre -->
+    <div class="mb-4">
+        <h1 class="display-3 fw-bold text-secondary">Liste des tickets</h1>
+        <p class="text-muted">
+            Lorem ipsum odor amet, consectetuer adipiscing elit. Ad elit dolor
+            eu interdum etiam maecenas quam. Lorem ipsum odor amet, consectetuer
+            adipiscing elit.
+        </p>
+    </div>
+    <!-- Card -->
+    <div class="card shadow-lg border-0 mb-5">
+        <div class="card-body p-2 p-md-4 p-lg-5">
+            <!-- Tableau responsive -->
+            <div class="table-responsive">
+                <table
+                    class="table table-hover align-middle table-uniform mb-0"
+                    style="width: 100%"
+                >
+                    <thead>
+                        <tr class="text-center text-secondary">
+                            <th scope="col" style="width: 10%">Ref ticket</th>
+                            <th scope="col" style="width: 20%">Date d'achat</th>
+                            <th scope="col" style="width: 30%">N° paiement</th>
+
+                            <th
+                                scope="col"
+                                class="hide-element-mobile hide-element-tablette"
+                                style="width: 50%"
+                            >
+                                Séance(s) commandée(s)
+                            </th>
+                            <th scope="col" style="width: 10%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in tickets%}
+                        <tr>
+                            <!-- ID -->
+                            <td class="text-center">
+                                <span class="text-muted">
+                                    <a
+                                        href="{% url 'ticket_detail'  ticket.payment.paymentUid %}"
+                                        style="text-decoration: none"
+                                    >
+                                        {{ ticket.id }}
+                                    </a>
+                                </span>
+                            </td>
+                            <!-- Date -->
+                            <td class="text-center film-title">
+                                <span class="text-muted titre-film">
+                                    {{ ticket.date|date:'d/m/Y' }}
+                                </span>
+                            </td>
+                            <!-- Paiement -->
+                            <td class="text-center">
+                                <span class="badge bg-success">
+                                    {{ ticket.payment.paymentUid }}
+                                </span>
+                            </td>
+                            <!-- Orders -->
+                            <td
+                                class="text-start hide-element-mobile hide-element-tablette"
+                            >
+                                <span class="text-muted">
+                                    {{ticket.orders_formatted|linebreaksbr}}</span
+                                >
+                            </td>
+                            <!-- Total -->
+                            <td class="text-center">
+                                <span class="badge bg-primary">
+                                    {{ ticket.payment.cartAmount|floatformat:2}}
+                                    €
+                                </span>
+                            </td>
+
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

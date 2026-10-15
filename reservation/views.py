@@ -1,4 +1,9 @@
+import os
+import time
+
+import qrcode
 from django import forms
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from django.http import (Http404, HttpResponse, HttpResponseBadRequest,
@@ -7,8 +12,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from reservation.models import Cart, Order
+from account_app.models import Profile
+from reservation.models import Cart, Order, Payment, Ticket
 from seance_app.models import Seance
+
+from .form import PaymentForm
 
 
 def add_to_cart(request, pk):
@@ -159,3 +167,109 @@ def update(request):
         except ObjectDoesNotExist:
             raise Http404("not found")
     return HttpResponse("ok")
+
+
+# Paiement
+def payment(request):
+
+    cart =get_object_or_404(Cart, user=request.user.id)
+
+    form = PaymentForm(request.POST)
+
+    context = {"form": form, "cart": cart}
+    return render(request, "reservation/payment.html", context)
+
+
+def valid_payment(request):
+    user = request.user
+    cart = get_object_or_404(Cart, user=request.user)
+    orders = Order.objects.filter(user=user)
+    profile = Profile.objects.get(user=user)
+    birthdate = profile.birthday
+    cardNumber = profile.accountNb
+    bankName = profile.bankName
+    cartAmount = cart.total
+    orderList = cart.orders.all()
+
+    # On deduit du solde du compte de l'user le montant du panier
+    profile.accountBalance -= cartAmount
+    profile.save()
+
+    # On creer les infos du paiement en bdd
+    payment = Payment.objects.create(
+        user=user,
+        birthDate=birthdate,
+        cardNumber=cardNumber,
+        bankName=bankName,
+        orders=list(orderList),
+        cartAmount=cartAmount,
+    )
+    payment.save()
+
+    # Generer le qrcode du ticket
+    # Le lien qui sera sur le qr_code
+    data = f"http://127.0.0.1:8000/cart/ticket_detail/{payment.paymentUid}/"
+
+    img = qrcode.make(data)
+    img_name = "qr" + str(time.time()) + ".png"
+    img_path = os.path.join(settings.MEDIA_ROOT, img_name)
+    img.save(img_path)
+
+    # On creer les infos du ticket associé au paiement en bdd
+    ticket = Ticket.objects.create(
+        user=user,
+        payment=payment,
+        qrcode=str(img_name),
+    )
+    ticket.save()
+
+    cart.isPaid = True
+    cart.save()
+
+    # Quand le panier a été payé, supprimer le panier et les orders à l'intérieurs
+    if cart.isPaid:
+        cart.delete()
+        orders.delete()
+
+    context = {"orders": orders, "img_name": img_name, "ticket": ticket}
+
+    return render(request, "reservation/valid_payment.html", context)
+
+
+# Détail du ticket
+def ticket_detail(request, paymentUid):
+    ticket = get_object_or_404(
+        Ticket, payment__paymentUid=paymentUid, user=request.user
+    )
+
+    orders = (
+        str(ticket.payment.orders)
+        .replace(", <Order:", "\n<Order:")
+        .replace("[", "")
+        .replace("<", "-")
+        .replace(">", "")
+        .replace("]", "")
+        .replace("Order:", "")
+    )
+
+    return render(
+        request, "reservation/ticket_detail.html", {"ticket": ticket, "orders": orders}
+    )
+
+# Liste des tickets de l'utilisateur
+def ticket_list(request):
+    tickets = Ticket.objects.filter(user=request.user)
+
+    for ticket in tickets:
+        ticket.orders_formatted = (
+            str(ticket.payment.orders)
+            .replace(", <Order:", "\n<Order:")
+            .replace("[", "")
+            .replace("<", "-")
+            .replace(">", "")
+            .replace("]", "")
+            .replace("Order:", "")
+        )
+
+    context = {"tickets": tickets}
+    return render(request, "reservation/ticket_list.html", context)

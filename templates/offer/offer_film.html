@@ -53,7 +53,7 @@
                         <form action="" method="post">
                             {% csrf_token %}
                             <button
-                                class="btn btn-outline-info btn-sm rounded-4"
+                                class="btn btn-outline-info btn-sm rounded-4 w-25"
                             >
                                 <a
                                     href="{% url 'creneau_film' film.pk %}"
@@ -62,6 +62,7 @@
                                     >Choisir</a
                                 >
                             </button>
+                            <br /><br />
                         </form>
                     </div>
                     <div class="col-md-12 col-lg-2">

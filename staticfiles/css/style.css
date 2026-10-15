@@ -51,7 +51,9 @@
     white-space: nowrap;
 }
 
-
+.hide-element{
+    display: none;
+}
 
 /* ---- R E S P O N S I V E ---- */
 
@@ -206,3 +208,18 @@
         width: 80px;
         }
     }
+
+
+
+    .qr-code {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+
+/* Sur mobile */
+@media (max-width: 576px) {
+    .qr-code {
+        max-width: 160px;
+    }
+}

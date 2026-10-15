@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 from bk3.settings import AUTH_USER_MODEL
@@ -17,9 +19,9 @@ class Order(models.Model):
 
     def __str__(self):
         if self.seance.film:
-            return f"{self.seance.programme} '{self.seance.film.titre}' {self.seance.date.strftime('%d/%m/%Y')} - {self.seance.horaire} ({self.quantity})"
+            return f"{self.seance.programme} '{self.seance.film.titre}' le {self.seance.date.strftime('%d/%m/%Y')} à {self.seance.horaire}  - (quantité:{self.quantity})"
         else:
-            return f"{self.seance.programme} '{self.seance.evenement.titre}' {self.seance.date.strftime('%d/%m/%Y')} - {self.seance.horaire} ({self.quantity})"
+            return f"{self.seance.programme} '{self.seance.evenement.titre}' le {self.seance.date.strftime('%d/%m/%Y')} à {self.seance.horaire}  - (quantité: {self.quantity})"
 
 
 # Panier
@@ -33,3 +35,43 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.user.username}"
+
+
+# Paiement
+class Payment(models.Model):
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    birthDate = models.DateTimeField()
+    cardNumber = models.CharField(max_length=50)
+    bankName = models.CharField(max_length=50)
+    paymentUid = models.UUIDField(default=uuid.uuid4)
+    cartAmount = models.FloatField(default=0.00)
+    orders = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return (
+            "Paiement: "
+            + self.user.last_name
+            + " "
+            + self.user.first_name
+            + " - "
+            + str(self.paymentUid)
+        )
+
+
+# Ticket
+class Ticket(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    payment = models.OneToOneField(
+        Payment, on_delete=models.CASCADE, null=True, blank=True
+    )
+    qrcode = models.CharField(max_length=100)
+
+    def __str__(self):
+        return (
+            self.user.last_name
+            + " "
+            + self.user.first_name
+            + " "
+            + str(self.payment.id)
+        )
