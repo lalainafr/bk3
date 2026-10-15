@@ -182,7 +182,6 @@ def payment(request):
 
 def valid_payment(request):
     user = request.user
-    # cart = Cart.objects.get(user = user)
     cart = get_object_or_404(Cart, user=request.user)
     orders = Order.objects.filter(user=user)
     profile = Profile.objects.get(user=user)
@@ -257,9 +256,7 @@ def ticket_detail(request, paymentUid):
         request, "reservation/ticket_detail.html", {"ticket": ticket, "orders": orders}
     )
 
-    # Liste des tickets de l'utilisateur
-
-
+# Liste des tickets de l'utilisateur
 def ticket_list(request):
     tickets = Ticket.objects.filter(user=request.user)
 

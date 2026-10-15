@@ -19,7 +19,7 @@ class Order(models.Model):
 
     def __str__(self):
         if self.seance.film:
-            return f"{self.seance.programme} '{self.seance.film.titre}' le {self.seance.date.strftime('%d/%m/%Y')} à {self.seance.horaire} ({self.quantity})"
+            return f"{self.seance.programme} '{self.seance.film.titre}' le {self.seance.date.strftime('%d/%m/%Y')} à {self.seance.horaire}  - (quantité:{self.quantity})"
         else:
             return f"{self.seance.programme} '{self.seance.evenement.titre}' le {self.seance.date.strftime('%d/%m/%Y')} à {self.seance.horaire}  - (quantité: {self.quantity})"
 
