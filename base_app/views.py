@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect 
 
 def index(request):
+    
+    if request.user.is_superuser:
+        return redirect('main_dashboard')
     return render(request, "base/home.html")
 
 
