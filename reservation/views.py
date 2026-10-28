@@ -225,6 +225,14 @@ def valid_payment(request):
 
     cart.isPaid = True
     cart.save()
+    
+    for order in orders:
+        seance = order.seance
+        order.seance.place_dispo -= order.quantity
+        seance.save()
+        
+    
+        
 
     # Quand le panier a été payé, supprimer le panier et les orders à l'intérieurs
     if cart.isPaid:

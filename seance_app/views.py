@@ -318,12 +318,14 @@ def update_seance(request, pk):
     seance = Seance.objects.get(pk=pk)
     if request.method == "POST":
         form = UpdateSeanceForm(request.POST, instance=seance)
+        
         if form.is_valid():
-
             # disponibilité salle selon creneau et date choisis
             salle = request.POST.get("salle")
             date = request.POST.get("date")
             horaire = request.POST.get("horaire")
+            film = request.POST.get("film")
+            evenement = request.POST.get("evenement")
 
             indisponible = Seance.objects.filter(
                 salle=salle,
@@ -338,6 +340,7 @@ def update_seance(request, pk):
                 return redirect("list_seance")
             else:
                 var = form.save(commit=False)
+
                 var.place_dispo = var.salle.capacite
                 if var.film:
                     var.programme = "Film"

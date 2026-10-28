@@ -191,8 +191,12 @@ class UpdateSeanceForm(forms.ModelForm):
         ]
 
         widgets = {
-            "film": forms.Select(attrs={"class": "form-control"}),
-            "evenement": forms.Select(attrs={"class": "form-control"}),
+            "film": forms.Select(attrs={
+                "class": "form-control",
+                }),
+            "evenement": forms.Select(attrs={
+                "class": "form-control",
+                }),
             "salle": forms.Select(attrs={"class": "form-control"}),
             "horaire": forms.Select(
                 attrs={
@@ -201,3 +205,9 @@ class UpdateSeanceForm(forms.ModelForm):
             ),
             "date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
         }
+        
+    # Verrouile les champs 'evenement' et 'film'
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["film"].disabled = True
+        self.fields["evenement"].disabled = True
