@@ -18,7 +18,9 @@ from seance_app.models import Seance
 
 from .form import PaymentForm
 
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url="login")
 def add_to_cart(request, pk):
 
     user = request.user
@@ -82,6 +84,7 @@ def cart(request):
 
 
 # AJAX - supprimer un order dans le panier
+@login_required(login_url="login")
 @csrf_exempt
 def delete_data(request):
     # requete POST à partir de l'AJAX
@@ -111,12 +114,14 @@ def delete_data(request):
 
 
 # From to procces the data for update order quantity
+
 class UpdateForm(forms.Form):
     operation = forms.CharField()
     id = forms.IntegerField()
 
 
 # ajax update order quantity
+@login_required(login_url="login")
 def update(request):
     if request.method != "POST":
         return HttpResponseBadRequest("invalid method")
@@ -170,6 +175,7 @@ def update(request):
 
 
 # Paiement
+@login_required(login_url="login")
 def payment(request):
 
     cart =get_object_or_404(Cart, user=request.user.id)
@@ -179,7 +185,7 @@ def payment(request):
     context = {"form": form, "cart": cart}
     return render(request, "reservation/payment.html", context)
 
-
+@login_required(login_url="login")
 def valid_payment(request):
     user = request.user
     cart = get_object_or_404(Cart, user=request.user)
@@ -245,6 +251,7 @@ def valid_payment(request):
 
 
 # Détail du ticket
+@login_required(login_url="login")
 def ticket_detail(request, paymentUid):
     ticket = get_object_or_404(
         Ticket, payment__paymentUid=paymentUid, user=request.user
@@ -265,6 +272,7 @@ def ticket_detail(request, paymentUid):
     )
 
 # Liste des tickets de l'utilisateur
+@login_required(login_url="login")
 def ticket_list(request):
     tickets = Ticket.objects.filter(user=request.user)
 

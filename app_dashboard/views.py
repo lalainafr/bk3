@@ -4,12 +4,16 @@ from seance_app.models import Seance
 from django.db.models import Sum
 from reservation.models import Ticket
 
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def main_dashboard(request):
     return render(request, "dashboard/main_dashboard.html")
 
-
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def dashboard_remplissage_seance(request):
     seances = Seance.objects.select_related(
         "salle", "salle__cinema", "film", "evenement"
@@ -44,7 +48,8 @@ def dashboard_remplissage_seance(request):
     )
     
     
-
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def dashboard_remplissage_salle(request):
     seances = Seance.objects.select_related(
         "salle", "salle__cinema", "film", "evenement"
@@ -105,7 +110,8 @@ def dashboard_remplissage_salle(request):
     )
     
 
-
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def dashboard_remplissage_creneau(request):
     creneaux = ["10h", "14h", "17h", "21h"]
     resultats = []
@@ -144,8 +150,9 @@ def dashboard_remplissage_creneau(request):
     )
 
 
-
 # Liste des tickets de tous les utilisateurs
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def all_ticket_list(request):
     tickets = Ticket.objects.all()
 

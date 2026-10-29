@@ -7,10 +7,16 @@ from .form import (CreateCinemaForm, CreateEvenementForm, CreateFilmForm,
                    UpdateSeanceForm)
 from .models import Cinema, Evenement, Film, Salle, Seance
 
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+
 # ---------- CINEMA ----------
 
 
-# creating cinema
+# # creating cinema
+# Il faut que le user soit connecté et soit un staff
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def create_cinema(request):
     if request.method == "POST":
         form = CreateCinemaForm(request.POST)
@@ -30,6 +36,8 @@ def create_cinema(request):
 
 
 # Edit cinema
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def update_cinema(request, pk):
     cinema = Cinema.objects.get(pk=pk)
     if request.method == "POST":
@@ -51,6 +59,8 @@ def update_cinema(request, pk):
 
 
 # List cinema
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def list_cinema(request):
     cinemas = Cinema.objects.all()
     context = {"cinemas": cinemas}
@@ -58,6 +68,8 @@ def list_cinema(request):
 
 
 # Delete cinema
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def delete_cinema(request, pk):
     cinema = Cinema.objects.get(pk=pk)
     cinema.delete()
@@ -67,8 +79,9 @@ def delete_cinema(request, pk):
 
 # ---------- SALLE ----------
 
-
 # creating salle
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def create_salle(request):
     if request.method == "POST":
         form = CreateSalleForm(request.POST)
@@ -89,6 +102,8 @@ def create_salle(request):
 
 
 # Edit salle
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def update_salle(request, pk):
     salle = Salle.objects.get(pk=pk)
     if request.method == "POST":
@@ -110,6 +125,8 @@ def update_salle(request, pk):
 
 
 # Delete salle
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def list_salle(request):
     salles = Salle.objects.all()
     context = {"salles": salles}
@@ -117,6 +134,8 @@ def list_salle(request):
 
 
 # Delete salle
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def delete_salle(request, pk):
     salle = Salle.objects.get(pk=pk)
     salle.delete()
@@ -128,6 +147,8 @@ def delete_salle(request, pk):
 
 
 # creating film
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def create_film(request):
     if request.method == "POST":
         form = CreateFilmForm(request.POST, request.FILES)
@@ -147,6 +168,8 @@ def create_film(request):
 
 
 # Edit film
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def update_film(request, pk):
     film = Film.objects.get(pk=pk)
     if request.method == "POST":
@@ -168,6 +191,8 @@ def update_film(request, pk):
 
 
 # List film
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def list_film(request):
     films = Film.objects.all()
     context = {"films": films}
@@ -175,6 +200,8 @@ def list_film(request):
 
 
 # Detail film
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def detail_film(request, pk):
     film = Film.objects.get(pk=pk)
     context = {"film": film}
@@ -182,6 +209,8 @@ def detail_film(request, pk):
 
 
 # Delete film
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def delete_film(request, pk):
     film = Film.objects.get(pk=pk)
     film.delete()
@@ -193,6 +222,8 @@ def delete_film(request, pk):
 
 
 # creating evenement
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def create_evenement(request):
     if request.method == "POST":
         form = CreateEvenementForm(request.POST, request.FILES)
@@ -212,6 +243,8 @@ def create_evenement(request):
 
 
 # Detail evenement
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def detail_evenement(request, pk):
     evenement = Evenement.objects.get(pk=pk)
     context = {"evenement": evenement}
@@ -240,6 +273,8 @@ def update_evenement(request, pk):
 
 
 # List evenement
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def list_evenement(request):
     evenements = Evenement.objects.all()
     context = {"evenements": evenements}
@@ -247,6 +282,8 @@ def list_evenement(request):
 
 
 # Delete evenement
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def delete_evenement(request, pk):
     evenement = Evenement.objects.get(pk=pk)
     evenement.delete()
@@ -258,6 +295,8 @@ def delete_evenement(request, pk):
 
 
 # creating seance
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def create_seance(request):
     if request.method == "POST":
         form = CreateSeanceForm(request.POST)
@@ -307,6 +346,8 @@ def create_seance(request):
 
 
 # Detail seance
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def detail_seance(request, pk):
     seance = Seance.objects.get(pk=pk)
     context = {"seance": seance}
@@ -314,6 +355,8 @@ def detail_seance(request, pk):
 
 
 # Edit seance
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def update_seance(request, pk):
     seance = Seance.objects.get(pk=pk)
     if request.method == "POST":
@@ -361,6 +404,8 @@ def update_seance(request, pk):
 
 
 # List seance
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def list_seance(request):
     seances = Seance.objects.all()
     context = {"seances": seances}
@@ -368,6 +413,8 @@ def list_seance(request):
 
 
 # Delete seance
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def delete_seance(request, pk):
     seance = Seance.objects.get(pk=pk)
     seance.delete()

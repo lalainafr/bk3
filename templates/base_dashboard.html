@@ -29,7 +29,12 @@
                 <aside class="col-lg-2 col-12 sidebar">
                     <!-- En-tête -->
                     <p class="text-center shadow p-3 rounded-4">
-                        T a b l e a u &nbsp; d e &nbsp; b o r d
+                        <a
+                            href="{% url 'main_dashboard' %}"
+                            style="text-decoration: none"
+                        >
+                            T a b l e a u &nbsp; d e &nbsp; b o r d
+                        </a>
                     </p>
                     <div
                         class="sidebar-header d-flex justify-content-between align-items-center"
@@ -148,6 +153,14 @@
                                 >
                                     Seance
                                 </a>
+                            </li>
+                            <li class="nav-item text-center">
+                                <a
+                                    style="font-size: x-small"
+                                    class="btn btn-sm btn-outline-danger text-center rounded-5"
+                                    href="{% url 'logout' %}"
+                                    >Logout</a
+                                >
                             </li>
                         </ul>
                     </nav>

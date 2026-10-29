@@ -55,40 +55,14 @@
                 </li>
                 </li>
                 {% if user.is_superuser %}
-                <li class="nav-item dropdown">
-                    <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdownMenuLink"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        <b>Dashboard</b>
-                    </a>
-                    <div
-                        class="dropdown-menu"
-                        aria-labelledby="navbarDropdownMenuLink"
-                    >
-                        <a class="dropdown-item" href="{% url 'list_cinema' %}"
-                            >Cinema</a
+                 <li class="nav-item"></li>
+                <a
+                            href="{% url 'main_dashboard' %}"
+                            style="text-decoration: none"
                         >
-                        <a class="dropdown-item" href="{% url 'list_salle' %}"
-                            >Salle</a
-                        >
-                        <a class="dropdown-item" href="{% url 'list_film' %}"
-                            >Film</a
-                        >
-                        <a
-                            class="dropdown-item"
-                            href="{% url 'list_evenement' %}"
-                            >Evenement</a
-                        >
-                        <a class="dropdown-item" href="{% url 'list_seance' %}"
-                            >Seance</a
-                        >
-                    </div>
-                </li>
+                            Dashboard
+                        </a>
+                        </li>
                 {% endif %} {% endif %} {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
