@@ -4,6 +4,7 @@ import time
 import qrcode
 from django import forms
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from django.http import (Http404, HttpResponse, HttpResponseBadRequest,
@@ -19,6 +20,7 @@ from seance_app.models import Seance
 from .form import PaymentForm
 
 
+@login_required(login_url="login")
 def add_to_cart(request, pk):
 
     user = request.user
@@ -82,6 +84,7 @@ def cart(request):
 
 
 # AJAX - supprimer un order dans le panier
+@login_required(login_url="login")
 @csrf_exempt
 def delete_data(request):
     # requete POST à partir de l'AJAX
@@ -111,12 +114,15 @@ def delete_data(request):
 
 
 # From to procces the data for update order quantity
+
+
 class UpdateForm(forms.Form):
     operation = forms.CharField()
     id = forms.IntegerField()
 
 
 # ajax update order quantity
+@login_required(login_url="login")
 def update(request):
     if request.method != "POST":
         return HttpResponseBadRequest("invalid method")
@@ -170,9 +176,10 @@ def update(request):
 
 
 # Paiement
+@login_required(login_url="login")
 def payment(request):
 
-    cart =get_object_or_404(Cart, user=request.user.id)
+    cart = get_object_or_404(Cart, user=request.user.id)
 
     form = PaymentForm(request.POST)
 
@@ -180,6 +187,7 @@ def payment(request):
     return render(request, "reservation/payment.html", context)
 
 
+@login_required(login_url="login")
 def valid_payment(request):
     user = request.user
     cart = get_object_or_404(Cart, user=request.user)
@@ -226,6 +234,11 @@ def valid_payment(request):
     cart.isPaid = True
     cart.save()
 
+    for order in orders:
+        seance = order.seance
+        order.seance.place_dispo -= order.quantity
+        seance.save()
+
     # Quand le panier a été payé, supprimer le panier et les orders à l'intérieurs
     if cart.isPaid:
         cart.delete()
@@ -237,6 +250,7 @@ def valid_payment(request):
 
 
 # Détail du ticket
+@login_required(login_url="login")
 def ticket_detail(request, paymentUid):
     ticket = get_object_or_404(
         Ticket, payment__paymentUid=paymentUid, user=request.user
@@ -256,7 +270,9 @@ def ticket_detail(request, paymentUid):
         request, "reservation/ticket_detail.html", {"ticket": ticket, "orders": orders}
     )
 
+
 # Liste des tickets de l'utilisateur
+@login_required(login_url="login")
 def ticket_list(request):
     tickets = Ticket.objects.filter(user=request.user)
 

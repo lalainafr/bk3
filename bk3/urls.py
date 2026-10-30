@@ -28,5 +28,6 @@ urlpatterns = [
     path("offer/", include("offer_app.urls")),
     path("cart/", include("reservation.urls")),
     path("dashboard/seance/", include("seance_app.urls")),
+    path("dashboard/", include("app_dashboard.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-# static file implementation
+# static file implementationπurl

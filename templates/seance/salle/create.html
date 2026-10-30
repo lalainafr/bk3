@@ -1,4 +1,4 @@
-{%extends 'base.html'%} {%load static%} {%load widget_tweaks%}
+{%extends 'base_dashboard.html'%} {%load static%} {%load widget_tweaks%}
 <div></div>
 {%block content%}
 
@@ -24,19 +24,19 @@
                 >
                     {% csrf_token %}
 
-                    <div class="mb-3">
+                    <div class="mb-3 small">
                         {{ form.cinema.label_tag }} {{ form.cinema }}
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 small">
                         {{ form.numero.label_tag }} {{ form.numero }}
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 small">
                         {{ form.capacite.label_tag }} {{ form.capacite }}
                     </div>
 
-                    <div class="form-check">
+                    <div class="form-check small">
                         {{ form.disponible }} {{ form.disponible.label_tag}}
                     </div>
                     <br />
