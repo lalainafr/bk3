@@ -39,7 +39,7 @@
                                 <td>{{ item.disponibles }}</td>
                                 <td>
                                    <div
-                                        class="progress-bar rounded-4 d-flex align-items-center justify-content-center px-3 {% if item.taux < 25 %}bg-danger {% elif item.taux < 50 %}bg-warning {% else %}bg-success{% endif %}"
+                                        class="progress-bar rounded-4 d-flex align-items-center justify-content-center text-light px-3 {% if item.taux < 25 %}bg-danger {% elif item.taux < 50 %}bg-warning {% else %}bg-success{% endif %}"
                                         role="progressbar"
                                         style="width: {{ item.taux|floatformat:1 }}%; min-width: 0;"
                                         aria-valuenow="{{ item.taux }}"

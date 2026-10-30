@@ -1,15 +1,14 @@
 from decimal import Decimal
+from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
 from account_app.models import Profile
-from reservation.models import Cart, Order, Payment, Ticket
 from reservation.form import PaymentForm
+from reservation.models import Cart, Order, Payment, Ticket
 from seance_app.models import Cinema, Evenement, Film, Salle, Seance
-
-from unittest.mock import patch
 
 User = get_user_model()
 
@@ -318,64 +317,56 @@ class TestCart(TestCase):
 
 
 class TestPaymentPage(TestCase):
-    
+
     def setUp(self):
         # Créer un utilisateur pour le test
         self.user = User.objects.create_user(
-            username="testuser",
-            password="testpassword123"
+            username="testuser", password="testpassword123"
         )
-        
+
         # Connecter l'utilisateur
-        self.client.login(
-            username="testuser",
-            password="testpassword123"
-        )
-        
+        self.client.login(username="testuser", password="testpassword123")
+
         # Créer un panier pour l'utilisateur
         self.cart = Cart.objects.create(user=self.user)
-        
-        # Adapter cette url au 'name' défini dans yuls.py 
+
+        # Adapter cette url au 'name' défini dans yuls.py
         self.url = reverse("payment")
-        
+
     # Affiche la page paiement
     def test_payment_page_is_displayed_correctly(self):
         response = self.client.get(self.url)
-        
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "reservation/payment.html")
-        
+
     # Vérifier le formulaire de paiement
     def test_payment_form_is_displayed_correctly(self):
         response = self.client.get(self.url)
-        
+
         self.assertEqual(response.status_code, 200)
         self.assertIn("form", response.context)
         self.assertIsInstance(response.context["form"], PaymentForm)
-        
-        
+
     # Vérifier le panier de l'utilisateur
     def test_user_cart_is_displayed_correctly(self):
         response = self.client.get(self.url)
-        
+
         self.assertEqual(response.status_code, 200)
         self.assertIn("cart", response.context)
         self.assertEqual(response.context["cart"], self.cart)
 
+
 class TestValidPayment(TestCase):
-    
+
     def setUp(self):
         # Créer un utilisateur
         self.user = User.objects.create_user(
-            username="testuser",
-            password="testpassword123"
+            username="testuser", password="testpassword123"
         )
 
         # Connecter l'utilisateur
-        self.client.login(
-            username="testuser",
-            password="testpassword123"
-        )
+        self.client.login(username="testuser", password="testpassword123")
 
         # Le signal crée automatiquement le profil
         self.profile = Profile.objects.get(user=self.user)
@@ -388,74 +379,64 @@ class TestValidPayment(TestCase):
         self.profile.save()
 
         # Créer le panier
-        self.cart = Cart.objects.create(
-            user=self.user,
-            total=Decimal("30.00")
-        )
-        
+        self.cart = Cart.objects.create(user=self.user, total=Decimal("30.00"))
+
         self.cinema = Cinema.objects.create(
-                nom="My cinema",
-                adresse="Paris",
-                telephone="0123456789",
-            )
-        
+            nom="My cinema",
+            adresse="Paris",
+            telephone="0123456789",
+        )
+
         self.salle = Salle.objects.create(
-                cinema=self.cinema,
-                numero=1,
-                capacite=100,
-                disponible=True,
-            )
-        
+            cinema=self.cinema,
+            numero=1,
+            capacite=100,
+            disponible=True,
+        )
+
         self.film = Film.objects.create(
-                titre="titre",
-                duree=4,
-                genre="genre",
-                date_sortie="2026-01-02",
-                realisateur="realisateur",
-                description="description",
-                affiche="films/2.jpg",
-            )
-    
+            titre="titre",
+            duree=4,
+            genre="genre",
+            date_sortie="2026-01-02",
+            realisateur="realisateur",
+            description="description",
+            affiche="films/2.jpg",
+        )
+
         self.seance = Seance.objects.create(
-                film=self.film,
-                evenement=None,
-                programme="programme",
-                place_dispo=1,
-                salle=self.salle,
-                date_created="2026-01-02",
-                date="2026-01-02",
-                horaire="11h",
-                prix=Decimal("5.00"),
-            )
-        
-  
+            film=self.film,
+            evenement=None,
+            programme="programme",
+            place_dispo=1,
+            salle=self.salle,
+            date_created="2026-01-02",
+            date="2026-01-02",
+            horaire="11h",
+            prix=Decimal("5.00"),
+        )
 
         # Créer une commande
         self.order = Order.objects.create(
             user=self.user,
             seance=self.seance,
         )
-                
 
         # Ajouter la commande au panier
         self.cart.orders.add(self.order)
 
         # Définir l'URL
         self.url = reverse("valid_payment")
-        
-    
-    # Vérifier que le paiement a été effectué        
+
+    # Vérifier que le paiement a été effectué
     @patch("reservation.views.qrcode.make")
     def test_payment_is_saved(self, mock_qrcode):
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, 200)
 
-        self.assertEqual(
-            Payment.objects.filter(user=self.user).count(),
-            1
-        )
-        
+        self.assertEqual(Payment.objects.filter(user=self.user).count(), 1)
+
     # Vérifier la création du ticket
     @patch("reservation.views.qrcode.make")
     def test_ticket_is_created(self, mock_qrcode):
@@ -464,7 +445,7 @@ class TestValidPayment(TestCase):
         ticket = Ticket.objects.get(user=self.user)
 
         self.assertIsNotNone(ticket.payment)
-    
+
     # Vérifier le statut du panier après paiement
     @patch("reservation.views.qrcode.make")
     def test_cart_is_marked_as_paid(self, mock_qrcode):
@@ -474,10 +455,8 @@ class TestValidPayment(TestCase):
 
         # Le panier est supprimé par la vue après le paiement.
         # Il ne peut donc plus être retrouvé en base.
-        self.assertFalse(
-            Cart.objects.filter(pk=cart_id).exists()
-        )
-    
+        self.assertFalse(Cart.objects.filter(pk=cart_id).exists())
+
     #  Vérifier la suppression du panier
     @patch("reservation.views.qrcode.make")
     def test_cart_is_deleted(self, mock_qrcode):
@@ -485,9 +464,7 @@ class TestValidPayment(TestCase):
 
         self.client.get(self.url)
 
-        self.assertFalse(
-            Cart.objects.filter(pk=cart_id).exists()
-        )
+        self.assertFalse(Cart.objects.filter(pk=cart_id).exists())
 
     # Vérifier la suppression des commandes
     @patch("reservation.views.qrcode.make")
@@ -496,8 +473,4 @@ class TestValidPayment(TestCase):
 
         self.client.get(self.url)
 
-        self.assertFalse(
-            Order.objects.filter(pk=order_id).exists()
-        )
-      
-    
+        self.assertFalse(Order.objects.filter(pk=order_id).exists())

@@ -4,6 +4,7 @@ import time
 import qrcode
 from django import forms
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from django.http import (Http404, HttpResponse, HttpResponseBadRequest,
@@ -18,7 +19,6 @@ from seance_app.models import Seance
 
 from .form import PaymentForm
 
-from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="login")
 def add_to_cart(request, pk):
@@ -115,6 +115,7 @@ def delete_data(request):
 
 # From to procces the data for update order quantity
 
+
 class UpdateForm(forms.Form):
     operation = forms.CharField()
     id = forms.IntegerField()
@@ -178,12 +179,13 @@ def update(request):
 @login_required(login_url="login")
 def payment(request):
 
-    cart =get_object_or_404(Cart, user=request.user.id)
+    cart = get_object_or_404(Cart, user=request.user.id)
 
     form = PaymentForm(request.POST)
 
     context = {"form": form, "cart": cart}
     return render(request, "reservation/payment.html", context)
+
 
 @login_required(login_url="login")
 def valid_payment(request):
@@ -231,14 +233,11 @@ def valid_payment(request):
 
     cart.isPaid = True
     cart.save()
-    
+
     for order in orders:
         seance = order.seance
         order.seance.place_dispo -= order.quantity
         seance.save()
-        
-    
-        
 
     # Quand le panier a été payé, supprimer le panier et les orders à l'intérieurs
     if cart.isPaid:
@@ -270,6 +269,7 @@ def ticket_detail(request, paymentUid):
     return render(
         request, "reservation/ticket_detail.html", {"ticket": ticket, "orders": orders}
     )
+
 
 # Liste des tickets de l'utilisateur
 @login_required(login_url="login")

@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect, render
 
 from .form import (CreateCinemaForm, CreateEvenementForm, CreateFilmForm,
@@ -6,9 +7,6 @@ from .form import (CreateCinemaForm, CreateEvenementForm, CreateFilmForm,
                    UpdateEvenementForm, UpdateFilmForm, UpdateSalleForm,
                    UpdateSeanceForm)
 from .models import Cinema, Evenement, Film, Salle, Seance
-
-from django.contrib.auth.decorators import login_required, user_passes_test
-
 
 # ---------- CINEMA ----------
 
@@ -78,6 +76,7 @@ def delete_cinema(request, pk):
 
 
 # ---------- SALLE ----------
+
 
 # creating salle
 @login_required(login_url="login")
@@ -361,14 +360,12 @@ def update_seance(request, pk):
     seance = Seance.objects.get(pk=pk)
     if request.method == "POST":
         form = UpdateSeanceForm(request.POST, instance=seance)
-        
+
         if form.is_valid():
             # disponibilité salle selon creneau et date choisis
             salle = request.POST.get("salle")
             date = request.POST.get("date")
             horaire = request.POST.get("horaire")
-            film = request.POST.get("film")
-            evenement = request.POST.get("evenement")
 
             indisponible = Seance.objects.filter(
                 salle=salle,

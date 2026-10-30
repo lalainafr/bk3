@@ -92,13 +92,12 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Login successful")
-            
+
             is_admin = request.user.is_authenticated and request.user.is_staff
 
-            
             if is_admin:
                 return redirect("main_dashboard")
-            else:    
+            else:
                 return redirect("home")
         else:
             messages.warning(request, "Invalid username or password")
@@ -111,7 +110,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out")
-        
+
     return redirect("home")
 
 

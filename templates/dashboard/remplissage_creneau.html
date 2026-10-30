@@ -9,50 +9,57 @@
         adipiscing elit.
     </p>
     <br /><br />
-    <div class="table-responsive">
-        <table
-            class="table table-striped text-center"
-            style="table-layout: fixed; width: 100%"
-        >
-            <thead class="table-light">
-                <tr>
-                    <th>Créneau</th>
-                    <th>Capacité</th>
-                    <th>Places occupées</th>
-                    <th>Places disponibles</th>
-                    <th>Taux de remplissage</th>
-                </tr>
-            </thead>
+   <div class="container mt-4">
+        <div class="card shadow-lg border-0 mb-5">
+            <div class="card-body p-2 p-md-4 p-lg-5">
+                <div class="table-responsive">
+                    <table
+                        class="table table-striped text-center"
+                        style="table-layout: fixed; width: 100%"
+                    >
+                        <thead class="table-light">
+                            <tr>
+                                <th>Créneau</th>
+                                <th>Capacité</th>
+                                <th>Places occupées</th>
+                                <th>Places disponibles</th>
+                                <th>Taux de remplissage</th>
+                            </tr>
+                        </thead>
 
-            <tbody>
-                {% for item in resultats %}
-                <tr>
-                    <td>{{ item.horaire }}</td>
-                    <td>{{ item.capacite }}</td>
-                    <td>{{ item.places_occupees }}</td>
-                    <td>{{ item.places_disponibles }}</td>
-                    <td>
-                        <div
-                            class="progress-bar rounded-4 d-flex align-items-center justify-content-center px-3 {% if item.taux < 25 %}bg-danger {% elif item.taux < 50 %}bg-warning {% else %}bg-success{% endif %}"
-                            role="progressbar"
-                            style="width: {{ item.taux|floatformat:1 }}%; min-width: 0;"
-                            aria-valuenow="{{ item.taux }}"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                        >
-                            {{ item.taux|floatformat:1 }}%
-                        </div>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="text-center">
-                        Aucune séance disponible.
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                        <tbody>
+                            {% for item in resultats %}
+                            <tr>
+                                <td>{{ item.horaire }}</td>
+                                <td>{{ item.capacite }}</td>
+                                <td>{{ item.places_occupees }}</td>
+                                <td>{{ item.places_disponibles }}</td>
+                                <td>
+                                    <div
+                                        class="progress-bar rounded-4 d-flex align-items-center justify-content-center px-3 text-light {% if item.taux < 25 %}bg-danger {% elif item.taux < 50 %}bg-warning {% else %}bg-success{% endif %}"
+                                        role="progressbar"
+                                        style="width: {{ item.taux|floatformat:1 }}%; min-width: 0;"
+                                        aria-valuenow="{{ item.taux }}"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                    >
+                                        {{ item.taux|floatformat:1 }}%
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    Aucune séance disponible.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>  
+   </div>
+</div>
 </div>
 {% endblock content%}

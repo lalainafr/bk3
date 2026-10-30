@@ -1,16 +1,17 @@
 # views.py
-from django.shortcuts import render
-from seance_app.models import Seance
-from django.db.models import Sum
-from reservation.models import Ticket
-
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db.models import Sum
+from django.shortcuts import render
+
+from reservation.models import Ticket
+from seance_app.models import Seance
 
 
 @login_required(login_url="login")
 @user_passes_test(lambda user: user.is_staff)
 def main_dashboard(request):
     return render(request, "dashboard/main_dashboard.html")
+
 
 @login_required(login_url="login")
 @user_passes_test(lambda user: user.is_staff)
@@ -26,19 +27,19 @@ def dashboard_remplissage_seance(request):
         disponibles = seance.place_dispo
 
         if capacite > 0 and disponibles is not None:
-            taux = round(
-                (capacite - disponibles) / capacite * 100, 1
-            )
+            taux = round((capacite - disponibles) / capacite * 100, 1)
         else:
             taux = None
 
-        resultats.append({
-            "seance": seance,
-            "capacite": capacite,
-            "disponibles": disponibles,
-            "taux": taux,
-        })
-        
+        resultats.append(
+            {
+                "seance": seance,
+                "capacite": capacite,
+                "disponibles": disponibles,
+                "taux": taux,
+            }
+        )
+
         print(seance.evenement)
 
     return render(
@@ -46,8 +47,8 @@ def dashboard_remplissage_seance(request):
         "dashboard/remplissage_seance.html",
         {"resultats": resultats},
     )
-    
-    
+
+
 @login_required(login_url="login")
 @user_passes_test(lambda user: user.is_staff)
 def dashboard_remplissage_salle(request):
@@ -88,27 +89,28 @@ def dashboard_remplissage_salle(request):
 
         if capacite_totale > 0:
             taux = round(
-                (capacite_totale - disponibles)
-                / capacite_totale * 100,
+                (capacite_totale - disponibles) / capacite_totale * 100,
                 1,
             )
         else:
             taux = None
 
-        resultats.append({
-            "salle": data["salle"],
-            "capacite": capacite_totale,
-            "disponibles": disponibles,
-            "nb_seances": nb_seances,
-            "taux": taux,
-        })
+        resultats.append(
+            {
+                "salle": data["salle"],
+                "capacite": capacite_totale,
+                "disponibles": disponibles,
+                "nb_seances": nb_seances,
+                "taux": taux,
+            }
+        )
 
     return render(
         request,
         "dashboard/remplissage_salle.html",
         {"resultats": resultats},
     )
-    
+
 
 @login_required(login_url="login")
 @user_passes_test(lambda user: user.is_staff)
@@ -129,19 +131,17 @@ def dashboard_remplissage_creneau(request):
 
         occupees = max(0, capacite - disponibles)
 
-        taux = (
-            round(occupees / capacite * 100, 2)
-            if capacite > 0
-            else 0
-        )
+        taux = round(occupees / capacite * 100, 2) if capacite > 0 else 0
 
-        resultats.append({
-            "horaire": creneau,
-            "capacite": capacite,
-            "places_disponibles": disponibles,
-            "places_occupees": occupees,
-            "taux": taux,
-        })
+        resultats.append(
+            {
+                "horaire": creneau,
+                "capacite": capacite,
+                "places_disponibles": disponibles,
+                "places_occupees": occupees,
+                "taux": taux,
+            }
+        )
 
     return render(
         request,
