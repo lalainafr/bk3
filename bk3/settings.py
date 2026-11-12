@@ -15,21 +15,31 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Chargement du fichier .env
+load_dotenv(BASE_DIR / ".env")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-+i-l&-ph+a%^rf%cw00l^46(jo%fl9s&msd5p2z2m()t=cteji"
+# Récupération de la clé secrète dans '.env'
+# Clé sécrete robuste générée avec 'secrets.token_urlsafe(50)' de DJANGO, généré à partir du fichier 'secret_key.py', 
+# Le secret key 
+# - ssera stockée dans le fichier '.env' et ne sera pas publié sur GitHub '.gitignore'
+# - Une autre clé sera générée en production
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Mode développement
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+
+# Vérification de sécurité
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY n'est pas définie !")
+
+# Protection : DEBUG ne doit pas être activé en production
+if not DEBUG and SECRET_KEY.startswith("django-insecure-"):
+    raise ValueError("Clé secrète non sécurisée pour la production !")
 
 ALLOWED_HOSTS = []
 

@@ -13,6 +13,8 @@ from .form import RegisterCustomerForm
 from .models import Profile
 from .token import generate_token
 
+from django.contrib.auth.decorators import login_required, user_passes_test
+
 User = get_user_model()
 
 
@@ -116,6 +118,9 @@ def logout_user(request):
 
 # profile (information nécessaire pour simuler un paiement)
 # end point qui servira pour simuler un paiement (vérification )
+# Il faut que le user soit connecté et soit un staff
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
 def list_profile(request):
     profile_data = list(
         Profile.objects.values(
@@ -132,7 +137,15 @@ def list_profile(request):
         )
     )
 
-    print(profile_data)
-
     # retourner un end point en json
     return JsonResponse({"profile_datas": profile_data})
+
+
+# Il faut que le user soit connecté et soit un staff
+@login_required(login_url="login")
+@user_passes_test(lambda user: user.is_staff)
+def user_list(request):
+    users = User.objects.all().order_by('-date_joined')
+    context ={ 'users': users }
+    return render(request, "account/user_list.html", context)
+    

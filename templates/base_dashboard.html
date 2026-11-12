@@ -64,6 +64,19 @@
                         <ul class="nav flex-column">
                             <p class="text-warning shadow-sm p-2 rounded-2">
                                 <i class="fa-solid fa-circle-arrow-right"></i>
+                                &nbsp;&nbsp; U T I L I S A T E U R
+                            </p>
+                            <li class="nav-item">
+                                <!-- Mettre en exergue le menu selectionné sur le side bar -->
+                                <a
+                                    href="{% url 'user_list' %}"
+                                    class="nav-link {% if request.resolver_match.url_name == 'user_list' %}active{% endif %}"
+                                >
+                                    Profil des utilisateurs
+                                </a>
+                            </li>
+                            <p class="text-warning shadow-sm p-2 rounded-2">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
                                 &nbsp;&nbsp; V E N T E
                             </p>
                             <li class="nav-item">
